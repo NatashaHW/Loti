@@ -91,6 +91,7 @@ class Scene1: SKScene {
 //        maskNode.filter = blurFilter
         
         // Tambahkan masker ke scene
+        // test
         addChild(maskNode)
         
 //        sleepColor.mask = maskNode
