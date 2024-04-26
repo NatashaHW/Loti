@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "Ref Scene Halte Tengkar.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -9,7 +10,6 @@
       "scale" : "2x"
     },
     {
-      "filename" : "Button Oranye.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
