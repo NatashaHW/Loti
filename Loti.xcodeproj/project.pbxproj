@@ -20,6 +20,7 @@
 		40CE6FD62BD9F09D005DA0BB /* LotiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE6FD52BD9F09D005DA0BB /* LotiTests.swift */; };
 		40CE6FE02BD9F09D005DA0BB /* LotiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE6FDF2BD9F09D005DA0BB /* LotiUITests.swift */; };
 		40CE6FE22BD9F09D005DA0BB /* LotiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE6FE12BD9F09D005DA0BB /* LotiUITestsLaunchTests.swift */; };
+		BB47A53A2BDB6E5400CD2F46 /* Transisi Kamar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB47A5392BDB6E5400CD2F46 /* Transisi Kamar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		40CE6FDB2BD9F09D005DA0BB /* LotiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LotiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40CE6FDF2BD9F09D005DA0BB /* LotiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotiUITests.swift; sourceTree = "<group>"; };
 		40CE6FE12BD9F09D005DA0BB /* LotiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotiUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BB47A5392BDB6E5400CD2F46 /* Transisi Kamar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transisi Kamar.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 		40CE6FAF2BD9F09C005DA0BB = {
 			isa = PBXGroup;
 			children = (
+				BB47A5392BDB6E5400CD2F46 /* Transisi Kamar.swift */,
 				40CE6FBA2BD9F09C005DA0BB /* Loti */,
 				40CE6FD42BD9F09D005DA0BB /* LotiTests */,
 				40CE6FDE2BD9F09D005DA0BB /* LotiUITests */,
@@ -275,6 +278,7 @@
 				40CE6FC42BD9F09C005DA0BB /* GameViewController.swift in Sources */,
 				40CE6FBC2BD9F09C005DA0BB /* AppDelegate.swift in Sources */,
 				400AF3EE2BDACDE4002B604B /* Scene2.swift in Sources */,
+				BB47A53A2BDB6E5400CD2F46 /* Transisi Kamar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
