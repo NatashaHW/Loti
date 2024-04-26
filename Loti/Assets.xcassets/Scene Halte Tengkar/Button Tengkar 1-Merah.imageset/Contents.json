@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "Button Tengkar 1-Merah.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -9,7 +10,6 @@
       "scale" : "2x"
     },
     {
-      "filename" : "Hp-Glow.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

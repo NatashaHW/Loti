@@ -65,6 +65,8 @@ struct Transisi_Kamar: View {
     }
 }
 
+
+
 // Definisikan SKViewRepresentable untuk menampilkan Scene1_Loti
 struct SKViewRepresentable: UIViewRepresentable {
     func makeUIView(context: Context) -> SKView {
