@@ -13,26 +13,24 @@ struct Gambar {
 
 }
     
-struct Transisi_Kamar: View {
+struct Tes_transisi: View {
     var currentImage: Gambar = Gambar()
     @State var animate: Bool = false
     
     var body: some View {
         ZStack{
+            
             Image(currentImage.awal)
+
             Image(currentImage.akhir)
                 .mask({
                     Circle()
                         .frame(width: self.animate ? 1200 : 10, height: self.animate ? 1200 : 10)
                         .position(CGPoint(x: 90.0, y: 350.0))
-                        .blur(radius: 20)
+                        .blur(radius: 30)
                 })
                 .opacity(animate ? 1 : 0)
             
-//            Circle()
-//                .frame(width: self.animate ? 1200 : 10, height: self.animate ? 1200 : 10)
-//                .position(CGPoint(x: 90.0, y: 350.0))
-//                .blur(radius: 10)
             
             Image("Hp")
                 .onTapGesture {
@@ -41,11 +39,12 @@ struct Transisi_Kamar: View {
                     }
                 }
                 .position(CGPoint(x: 90.0, y: 350.0))
+            
         }
         .ignoresSafeArea()
     }
 }
 
 #Preview {
-    Transisi_Kamar()
+    Tes_transisi()
 }
