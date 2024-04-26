@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		400AF3EE2BDACDE4002B604B /* Scene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400AF3ED2BDACDE4002B604B /* Scene2.swift */; };
 		400AF3F22BDB91F1002B604B /* Scene1_Loti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400AF3F12BDB91F1002B604B /* Scene1_Loti.swift */; };
-		400AF3F42BDB94AC002B604B /* Tes_transisi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400AF3F32BDB94AC002B604B /* Tes_transisi.swift */; };
 		40C606812BDA16CF00826842 /* Scene2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 40C606802BDA16CF00826842 /* Scene2.sks */; };
 		40CE6FBC2BD9F09C005DA0BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE6FBB2BD9F09C005DA0BB /* AppDelegate.swift */; };
 		40CE6FBE2BD9F09C005DA0BB /* Scene1_Loti.sks in Resources */ = {isa = PBXBuildFile; fileRef = 40CE6FBD2BD9F09C005DA0BB /* Scene1_Loti.sks */; };
@@ -45,7 +44,6 @@
 /* Begin PBXFileReference section */
 		400AF3ED2BDACDE4002B604B /* Scene2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene2.swift; sourceTree = "<group>"; };
 		400AF3F12BDB91F1002B604B /* Scene1_Loti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene1_Loti.swift; sourceTree = "<group>"; };
-		400AF3F32BDB94AC002B604B /* Tes_transisi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tes_transisi.swift; sourceTree = "<group>"; };
 		40C606802BDA16CF00826842 /* Scene2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene2.sks; sourceTree = "<group>"; };
 		40CE6FB82BD9F09C005DA0BB /* Loti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Loti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40CE6FBB2BD9F09C005DA0BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				BB47A5392BDB6E5400CD2F46 /* Transisi_Kamar.swift */,
-				400AF3F32BDB94AC002B604B /* Tes_transisi.swift */,
 				40CE6FBB2BD9F09C005DA0BB /* AppDelegate.swift */,
 				40CE6FBD2BD9F09C005DA0BB /* Scene1_Loti.sks */,
 				40C606802BDA16CF00826842 /* Scene2.sks */,
@@ -282,7 +279,6 @@
 			files = (
 				400AF3F22BDB91F1002B604B /* Scene1_Loti.swift in Sources */,
 				40CE6FC22BD9F09C005DA0BB /* Scene1.swift in Sources */,
-				400AF3F42BDB94AC002B604B /* Tes_transisi.swift in Sources */,
 				40CE6FC42BD9F09C005DA0BB /* GameViewController.swift in Sources */,
 				40CE6FBC2BD9F09C005DA0BB /* AppDelegate.swift in Sources */,
 				400AF3EE2BDACDE4002B604B /* Scene2.swift in Sources */,

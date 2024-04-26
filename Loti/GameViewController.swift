@@ -7,7 +7,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         // Membuat tampilan SwiftUI
-        let contentView = Tes_transisi()
+        let contentView = Transisi_Kamar()
         
         // Mengonversi tampilan SwiftUI menjadi tampilan UIKit
         let hostingController = UIHostingController(rootView: contentView)
