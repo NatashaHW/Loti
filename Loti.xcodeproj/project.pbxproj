@@ -110,13 +110,13 @@
 		40CE6FBA2BD9F09C005DA0BB /* Loti */ = {
 			isa = PBXGroup;
 			children = (
-				BB47A5392BDB6E5400CD2F46 /* Transisi_Kamar.swift */,
 				40CE6FBB2BD9F09C005DA0BB /* AppDelegate.swift */,
+				BB47A5392BDB6E5400CD2F46 /* Transisi_Kamar.swift */,
+				400AF3F12BDB91F1002B604B /* Scene1_Loti.swift */,
 				40CE6FBD2BD9F09C005DA0BB /* Scene1_Loti.sks */,
 				40C606802BDA16CF00826842 /* Scene2.sks */,
 				40CE6FBF2BD9F09C005DA0BB /* Actions.sks */,
 				40CE6FC12BD9F09C005DA0BB /* Scene1.swift */,
-				400AF3F12BDB91F1002B604B /* Scene1_Loti.swift */,
 				400AF3ED2BDACDE4002B604B /* Scene2.swift */,
 				40CE6FC32BD9F09C005DA0BB /* GameViewController.swift */,
 				40CE6FC52BD9F09C005DA0BB /* Main.storyboard */,
