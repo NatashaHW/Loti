@@ -25,6 +25,7 @@ class Scene2_Halte: SKScene {
     var bubbleRed3Tap: SKSpriteNode?
     var bubbleRed4Tap: SKSpriteNode?
     
+    var busBSD: SKSpriteNode?
     
     var isScene2ClockHandRotating = false
     var cameraNode: SKCameraNode?
@@ -64,6 +65,7 @@ class Scene2_Halte: SKScene {
         bubbleRed3Tap = childNode(withName: "//bubbleRed3Tap") as? SKSpriteNode
         bubbleRed4Tap = childNode(withName: "//bubbleRed4Tap") as? SKSpriteNode
         
+        busBSD = childNode(withName: "busBSD") as? SKSpriteNode
         
         // Sembunyikan node yang tidak terlihat pada awalnya
         scene2BNW2?.isHidden = true
@@ -115,15 +117,13 @@ class Scene2_Halte: SKScene {
             gestureRecognizer.numberOfTouchesRequired = 1
             sceneContainingBubbleRed1.view?.addGestureRecognizer(gestureRecognizer)
         }
-
+        
+        
     }
     
     
     @objc func swipeGesture (_ recognizer: UISwipeGestureRecognizer) {
-            // Handle swipe gesture here
-            print("swipe")
-            
-            swipeCount += 1
+        swipeCount += 1
         
         switch swipeCount {
         case 1:
@@ -133,6 +133,7 @@ class Scene2_Halte: SKScene {
             // Buat action untuk pergeseran ke atas
             let slideUpAction = SKAction.move(to: newPosition, duration: 0.5)
             
+            bubbleRed1?.zPosition = 20
             // Jalankan action pada bubbleRed1
             bubbleRed1?.run(slideUpAction) {
                 // Setelah pergeseran selesai, tunggu 0.1 detik
@@ -155,6 +156,7 @@ class Scene2_Halte: SKScene {
             // Buat action untuk pergeseran ke atas
             let slideUpAction = SKAction.move(to: newPosition, duration: 0.5)
             
+            bubbleRed2?.zPosition = 19
             // Jalankan action pada bubbleRed2
             bubbleRed2?.run(slideUpAction)
             
@@ -172,21 +174,38 @@ class Scene2_Halte: SKScene {
             // Buat action untuk pergeseran ke atas
             let slideUpAction = SKAction.move(to: newPosition, duration: 0.5)
             
+            bubbleRed3?.zPosition = 20
             // Jalankan action pada bubbleRed3
             bubbleRed3?.run(slideUpAction)
             
             // Tunggu 0.2 detik lebih lama
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 // Tampilkan bubbleRed3 setelah menunggu
-                self.bubbleRed3?.isHidden = false
+                self.bubbleRed4?.isHidden = false
+            }
+        case 4:
+            // Jika ini adalah swipe ketiga
+            // Tentukan posisi baru untuk bubbleRed3 setelah pergeseran ketiga
+            let newPosition = CGPoint(x: 235.5, y: -2054.918)
+            
+            // Buat action untuk pergeseran ke atas
+            let slideUpAction = SKAction.move(to: newPosition, duration: 0.5)
+            
+            bubbleRed4?.zPosition = 21
+            // Jalankan action pada bubbleRed3
+            bubbleRed4?.run(slideUpAction)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                // Unhide dengan transition slide dari kanan ke kiri
+                let slideDistance = self.size.width // Jarak pergeseran
+                let slideLeftAction = SKAction.moveBy(x: -(slideDistance + (slideDistance)/2), y: 0, duration: 0.5) // Menggeser ke kiri sejauh slideDistance dalam 0.5 detik
+                self.busBSD?.run(slideLeftAction)
             }
         default:
             break
         }
                 
     }
-
-
     
     // Fungsi untuk menangani sentuhan di layar
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -229,20 +248,17 @@ class Scene2_Halte: SKScene {
                     // Menampilkan bubbleRed1 dan mengubah posisinya
                     self.bubbleRed1?.isHidden = false
                     self.bubbleRed1?.position = CGPoint(x: -12, y: -3540)
-                    self.bubbleRed2?.position = CGPoint(x: 2, y: -3540)
-                    self.bubbleRed3?.position = CGPoint(x: 8.65, y: -3540)
+                    self.bubbleRed1?.zPosition = 35
                     
-//                    // Animasi saat bergeser ke atas
-//                    let slideUpAction = SKAction.move(to: CGPoint(x: -12, y: -1959.5), duration: 0.5)
-//                    self.bubbleRed1?.run(slideUpAction)
-//                    
-//                    // Menampilkan bubbleRed1 dan mengubah posisinya
-//                    self.bubbleRed2?.isHidden = false
-//                    self.bubbleRed2?.position = CGPoint(x: 2, y: -3540)
-//                        
-//                    // Animasi saat bergeser ke atas
-//                    let slideUpAction2 = SKAction.move(to: CGPoint(x: 222.537, y: -2301.2), duration: 0.5)
-//                    self.bubbleRed2?.run(slideUpAction2)
+                    self.bubbleRed2?.position = CGPoint(x: 2, y: -3540)
+                    self.bubbleRed2?.zPosition = 36
+                    
+                    self.bubbleRed3?.position = CGPoint(x: 8.65, y: -3540)
+                    self.bubbleRed3?.zPosition = 37
+                    
+                    self.bubbleRed4?.position = CGPoint(x: 25.037, y: -3540)
+                    self.bubbleRed4?.zPosition = 38
+                    
                 }
             }
         }])
