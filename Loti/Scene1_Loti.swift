@@ -1,6 +1,7 @@
 import SpriteKit
 import GameplayKit
 
+
 class Scene1_Loti: SKScene {
     
     var scene1SleepColor: SKSpriteNode?
@@ -163,12 +164,25 @@ class Scene1_Loti: SKScene {
         // Memanggil friendsBubble setelah 1 detik
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.friendsBubble()
-        }
-        
-        //tambahkan touches second nya yg diambil
             
+            //tambahkan touches second nya yg diambil (utk chat 2)
+            
+            // Navigate to Scene2_Halte
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                // Panggil Scene2_Halte
+                if let scene2 = Scene2_Halte(fileNamed: "Scene2_Halte") {
+                    // Setup scene yang baru
+                    scene2.scaleMode = .aspectFill
+                    // Transisi ke scene baru
+                    self.view?.presentScene(scene2, transition: SKTransition.moveIn(with: .right, duration: 2.0))
+                }
+            }
+            
+            
+        }
     }
         
+    
         // Fungsi untuk menampilkan animasi getaran
         func animateVibration(for node: SKSpriteNode?) {
             guard let node = node else { return }
