@@ -148,7 +148,11 @@ class Scene2_Halte: SKScene {
                     // Tampilkan bubbleRed2 setelah menunggu
                     self.bubbleRed2?.isHidden = false
                 }
+                // Provide impact haptic feedback
+                let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                           heavyImpactFeedbackGenerator.impactOccurred()
             }
+            
         case 2:
             // Jika ini adalah swipe kedua
             // Tentukan posisi baru untuk bubbleRed2 setelah pergeseran kedua
@@ -166,6 +170,9 @@ class Scene2_Halte: SKScene {
                 // Tampilkan bubbleRed2 setelah menunggu
                 self.bubbleRed3?.isHidden = false
             }
+            // Provide impact haptic feedback
+            let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                   heavyImpactFeedbackGenerator.impactOccurred()
             
         case 3:
             // Jika ini adalah swipe ketiga
@@ -184,6 +191,10 @@ class Scene2_Halte: SKScene {
                 // Tampilkan bubbleRed3 setelah menunggu
                 self.bubbleRed4?.isHidden = false
             }
+            
+            let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                   heavyImpactFeedbackGenerator.impactOccurred()
+            
         case 4:
             // Jika ini adalah swipe ketiga
             // Tentukan posisi baru untuk bubbleRed3 setelah pergeseran ketiga
@@ -211,6 +222,10 @@ class Scene2_Halte: SKScene {
                     }
                 }
             }
+            
+            let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                   heavyImpactFeedbackGenerator.impactOccurred()
+            
         default:
             break
         }

@@ -22,7 +22,10 @@ class Scene3_Diskusi: SKScene {
     
     var cameraNode: SKCameraNode?
     
+    var isCircle = false
+    
     var scene3IdeLoti1 = SKSpriteNode(imageNamed: "IdeLoti1")
+//    fileprivate let scene3IdeLoti1 = UIImageView(image: UIImage(named: "IdeLoti1"))
     
     // Property untuk mendeteksi apakah node sedang di-drag
     var isDraggingScene3IdeLoti1 = false
@@ -66,6 +69,7 @@ class Scene3_Diskusi: SKScene {
         litaYellow?.isHidden = true
         
 //        scene3IdeLoti1?.isHidden = false
+        
         scene3IdeLoti2?.isHidden = true
         scene3IdeLoti3?.isHidden = true
         
@@ -75,63 +79,42 @@ class Scene3_Diskusi: SKScene {
         litaChat1?.isHidden = false
         busBSD?.isHidden = false
         
-        let slideTo = CGPoint(x: 2856.91, y: 61.112)
+        let slideTo = CGPoint(x: 2856.91, y: 0.7)
         let slideRightAction = SKAction.move(to: slideTo, duration: 2.5)
         slideRightAction.timingMode = .easeIn
         busBSD?.run(slideRightAction)
         
         //reposition and rescale scene1sleepcolor
         scene3IdeLoti1.position = CGPoint(x: -272, y: -840)
-        
         addChild(scene3IdeLoti1)
-        
-//        scene3IdeLoti1.size = CGSize(width: 1179, height: 2421)
-        
-        // Tambahkan gesture recognizer ke properti view dari scene
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        view.addGestureRecognizer(panGestureRecognizer)
+        scene3IdeLoti1.isUserInteractionEnabled = true
+    
     }
     
-    // Fungsi untuk menangani gesture pan
-    @objc func handlePan(_ recognizer: UIPanGestureRecognizer) {
-//        guard let scene3IdeLoti1 = scene3IdeLoti1 else { return }
+    
+    // Override touchesBegan method to handle touch events
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Mendapatkan lokasi sentuhan saat ini
+        guard let touch = touches.first else { return }
+        let touchLocation = touch.location(in: self)
         
-        // Ambil lokasi gerakan pan di scene
-//        let translation = recognizer.translation(in: self)
-//        
-        switch recognizer.state {
-        case .began, .changed:
-            print("began, changed")
-            
-            let translation = recognizer.translation(in: self.view)
-            scene3IdeLoti1.inputView?.transform = CGAffineTransform(translationX: translation.x, y: 0)
-//            // Tentukan posisi baru untuk scene3IdeLoti1 berdasarkan pergeseran
-//            let newPosition = CGPoint(x: scene3IdeLoti1.position.x + translation.x, y: scene3IdeLoti1.position.y + translation.y)
-//            
-//            // Update posisi scene3IdeLoti1
-//            scene3IdeLoti1.position = newPosition
-//            
-//            // Atur ulang translation recognizer
-//            recognizer.setTranslation(CGPoint.zero, in: self)
-//            
-//            // Set isDraggingScene3IdeLoti1 ke true
-//            isDraggingScene3IdeLoti1 = true
-            
-        case .ended, .cancelled:
-            print("ended, cancelled")
-//            // Set isDraggingScene3IdeLoti1 ke false
-//            isDraggingScene3IdeLoti1 = false
-//            
-//            // Reset posisi scene3IdeLoti1 ke posisi awal
-//            scene3IdeLoti1.position = CGPoint(x: 0, y: 0)
-//            
-//            // Unhide scene3IdeLoti2 dan lakukan animasi slide
-//            scene3IdeLoti2?.isHidden = false
-//            slideScene3IdeLoti2()
-            
-        default:
-            break
+        if scene3IdeLoti1.contains(touchLocation) {
+            isCircle = true
+            print("ini circle")
         }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Mendapatkan lokasi sentuhan saat ini
+        guard let touch = touches.first else { return }
+        let touchLocation = touch.location(in: self)
+        
+        
+//        if isCircle {
+            scene3IdeLoti1.position = touchLocation
+//        }
+        
+        
     }
     
     // Fungsi untuk melakukan animasi slide pada scene3IdeLoti2
