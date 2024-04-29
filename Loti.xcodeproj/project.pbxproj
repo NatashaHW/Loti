@@ -11,6 +11,7 @@
 		400AF3F22BDB91F1002B604B /* Scene1_Loti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400AF3F12BDB91F1002B604B /* Scene1_Loti.swift */; };
 		401E15362BDE1E75007E117A /* Scene3_Diskusi.sks in Resources */ = {isa = PBXBuildFile; fileRef = 401E15352BDE1E75007E117A /* Scene3_Diskusi.sks */; };
 		401E15382BDE2AA6007E117A /* Scene3_Diskusi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401E15372BDE2AA6007E117A /* Scene3_Diskusi.swift */; };
+		4088B9452BE01CEC0072CBF0 /* Scene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088B9442BE01CEB0072CBF0 /* Scene2.swift */; };
 		40B8178C2BDF926700FF63AE /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B8178B2BDF926700FF63AE /* Haptics.swift */; };
 		40C606812BDA16CF00826842 /* Scene2_Halte.sks in Resources */ = {isa = PBXBuildFile; fileRef = 40C606802BDA16CF00826842 /* Scene2_Halte.sks */; };
 		40CE6FBC2BD9F09C005DA0BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE6FBB2BD9F09C005DA0BB /* AppDelegate.swift */; };
@@ -56,6 +57,7 @@
 		400AF3F12BDB91F1002B604B /* Scene1_Loti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene1_Loti.swift; sourceTree = "<group>"; };
 		401E15352BDE1E75007E117A /* Scene3_Diskusi.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene3_Diskusi.sks; sourceTree = "<group>"; };
 		401E15372BDE2AA6007E117A /* Scene3_Diskusi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene3_Diskusi.swift; sourceTree = "<group>"; };
+		4088B9442BE01CEB0072CBF0 /* Scene2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene2.swift; sourceTree = "<group>"; };
 		40B8178B2BDF926700FF63AE /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		40C606802BDA16CF00826842 /* Scene2_Halte.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene2_Halte.sks; sourceTree = "<group>"; };
 		40CE6FB82BD9F09C005DA0BB /* Loti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Loti.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,6 +138,7 @@
 				40CE6FC12BD9F09C005DA0BB /* Scene1.swift */,
 				400AF3F12BDB91F1002B604B /* Scene1_Loti.swift */,
 				400AF3ED2BDACDE4002B604B /* Scene2_Halte.swift */,
+				4088B9442BE01CEB0072CBF0 /* Scene2.swift */,
 				401E15372BDE2AA6007E117A /* Scene3_Diskusi.swift */,
 				40B8178B2BDF926700FF63AE /* Haptics.swift */,
 				F4F75AE42BDF9B4A00225E98 /* HomePlay.sks */,
@@ -321,6 +324,7 @@
 				40B8178C2BDF926700FF63AE /* Haptics.swift in Sources */,
 				40CE6FBC2BD9F09C005DA0BB /* AppDelegate.swift in Sources */,
 				400AF3EE2BDACDE4002B604B /* Scene2_Halte.swift in Sources */,
+				4088B9452BE01CEC0072CBF0 /* Scene2.swift in Sources */,
 				BB47A53A2BDB6E5400CD2F46 /* Transisi_Kamar.swift in Sources */,
 				BBBC81742BDFF05A00100068 /* TesScene3Diskusi.swift in Sources */,
 			);
@@ -504,7 +508,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96AS525Q93;
+				DEVELOPMENT_TEAM = 6Y742356Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -532,7 +536,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96AS525Q93;
+				DEVELOPMENT_TEAM = 6Y742356Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

@@ -23,7 +23,6 @@ class Scene3_Diskusi: SKScene {
     var cameraNode: SKCameraNode?
     
     var isCircle = false
-    //    fileprivate let scene3IdeLoti1 = UIImageView(image: UIImage(named: "IdeLoti1"))
     
     //cek node mana yg lagi di drag
     var isDraggingScene3IdeLoti1 = false
