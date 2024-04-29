@@ -68,21 +68,21 @@ struct Transisi_Kamar: View {
 
 
 // Definisikan SKViewRepresentable untuk menampilkan Scene1_Loti
-struct SKViewRepresentable: UIViewRepresentable {
-    func makeUIView(context: Context) -> SKView {
-        let skView = SKView()
-        if let scene = Scene1_Loti(fileNamed: "Scene1_Loti") {
-            scene.scaleMode = .aspectFill
-            scene.backgroundColor = .clear
-            skView.presentScene(scene)
-        }
-        return skView
-    }
-    
-    func updateUIView(_ uiView: SKView, context: Context) {
-        // Tidak ada pembaruan yang diperlukan
-    }
-}
+//struct SKViewRepresentable: UIViewRepresentable {
+//    func makeUIView(context: Context) -> SKView {
+//        let skView = SKView()
+//        if let scene = Scene1_Loti(fileNamed: "Scene1_Loti") {
+//            scene.scaleMode = .aspectFill
+//            scene.backgroundColor = .clear
+//            skView.presentScene(scene)
+//        }
+//        return skView
+//    }
+//    
+//    func updateUIView(_ uiView: SKView, context: Context) {
+//        // Tidak ada pembaruan yang diperlukan
+//    }
+//}
 
 
 #Preview {

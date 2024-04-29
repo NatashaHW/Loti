@@ -10,25 +10,27 @@ class Scene3_Diskusi: SKScene {
     var litaSemiYellow: SKSpriteNode?
     var litaYellow: SKSpriteNode?
     
-    
+    var scene3IdeLoti1 : SKSpriteNode?
     var scene3IdeLoti2: SKSpriteNode?
     var scene3IdeLoti3: SKSpriteNode?
     var lotiChat1: SKSpriteNode?
     var lotiChat2: SKSpriteNode?
     var lotiChat3: SKSpriteNode?
     var litaChat1: SKSpriteNode?
-
+    
     var busBSD: SKSpriteNode?
     
     var cameraNode: SKCameraNode?
     
     var isCircle = false
+    //    fileprivate let scene3IdeLoti1 = UIImageView(image: UIImage(named: "IdeLoti1"))
     
-    var scene3IdeLoti1 = SKSpriteNode(imageNamed: "IdeLoti1")
-//    fileprivate let scene3IdeLoti1 = UIImageView(image: UIImage(named: "IdeLoti1"))
-    
-    // Property untuk mendeteksi apakah node sedang di-drag
+    //cek node mana yg lagi di drag
     var isDraggingScene3IdeLoti1 = false
+    var isDraggingScene3IdeLoti2 = false
+    
+    //simpen posisi node awal
+    var originalPosition: CGPoint?
     
     override func didMove(to view: SKView) {
         // Mengatur latar belakang menjadi warna putih
@@ -48,7 +50,7 @@ class Scene3_Diskusi: SKScene {
         litaSemiYellow = childNode(withName: "//litaSemiYellow") as? SKSpriteNode
         litaYellow = childNode(withName: "//litaYellow") as? SKSpriteNode
         
-//        scene3IdeLoti1 = childNode(withName: "//scene3IdeLoti1") as? SKSpriteNode
+        scene3IdeLoti1 = childNode(withName: "//IdeLotiTes") as? SKSpriteNode
         scene3IdeLoti2 = childNode(withName: "//scene3IdeLoti2") as? SKSpriteNode
         scene3IdeLoti3 = childNode(withName: "//scene3IdeLoti3") as? SKSpriteNode
         
@@ -68,7 +70,7 @@ class Scene3_Diskusi: SKScene {
         litaSemiYellow?.isHidden = true
         litaYellow?.isHidden = true
         
-//        scene3IdeLoti1?.isHidden = false
+        scene3IdeLoti1?.isHidden = false
         
         scene3IdeLoti2?.isHidden = true
         scene3IdeLoti3?.isHidden = true
@@ -85,48 +87,116 @@ class Scene3_Diskusi: SKScene {
         busBSD?.run(slideRightAction)
         
         //reposition and rescale scene1sleepcolor
-        scene3IdeLoti1.position = CGPoint(x: -272, y: -840)
-        addChild(scene3IdeLoti1)
-        scene3IdeLoti1.isUserInteractionEnabled = true
-    
+        //        scene3IdeLoti1.position = CGPoint(x: -275, y: -900)
+        //        scene3IdeLoti1?.isUserInteractionEnabled = true
+        
+        
     }
     
-    
-    // Override touchesBegan method to handle touch events
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // Mendapatkan lokasi sentuhan saat ini
-        guard let touch = touches.first else { return }
-        let touchLocation = touch.location(in: self)
-        
-        if scene3IdeLoti1.contains(touchLocation) {
-            isCircle = true
-            print("ini circle")
+        for touch in touches {
+            let location = touch.location(in: self)
+            if let node = self.nodes(at: location).first as? SKSpriteNode {
+                if node == scene3IdeLoti1 {
+                    print("touch began for scene3IdeLoti1")
+                    originalPosition = node.position // Store original position
+                    isDraggingScene3IdeLoti1 = true
+                } else if node == scene3IdeLoti2 {
+                    print("touch began for scene3IdeLoti2")
+                    originalPosition = node.position // Store original position
+                    isDraggingScene3IdeLoti2 = true
+                } else if node == scene3IdeLoti3 {
+                    print("touch began for scene3IdeLoti3")
+                    originalPosition = node.position // Store original position
+                }
+            }
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // Mendapatkan lokasi sentuhan saat ini
-        guard let touch = touches.first else { return }
-        let touchLocation = touch.location(in: self)
-        
-        
-//        if isCircle {
-            scene3IdeLoti1.position = touchLocation
-//        }
-        
-        
+        for touch in touches {
+            let location = touch.location(in: self)
+            if let node = isDraggingScene3IdeLoti1 ? scene3IdeLoti1 : (isDraggingScene3IdeLoti2 ? scene3IdeLoti2 : scene3IdeLoti3) {
+                print("holding \(node)")
+                node.position = location // Update position to follow touch
+            }
+        }
     }
     
-    // Fungsi untuk melakukan animasi slide pada scene3IdeLoti2
-    func slideScene3IdeLoti2() {
-        // Tentukan posisi slideTo untuk scene3IdeLoti2
-        let slideTo = CGPoint(x: 100, y: 0)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            
+            if let node = self.nodes(at: location).first as? SKSpriteNode {
+                // Ensure you have the original position stored somewhere
+                guard let originalPos = originalPosition else {
+                    return
+                }
+                
+                // Check if the touch location is within the specified area
+                if location.x > 260 {
+                    // Switch to the next node
+                    if node == scene3IdeLoti1 {
+                        HapticUtils.hapticIde()
+                        isDraggingScene3IdeLoti1 = false
+                        scene3IdeLoti1?.isHidden = true
+                        scene3IdeLoti2?.isHidden = false
+                    } else if node == scene3IdeLoti2 {
+                        HapticUtils.hapticIde()
+                        isDraggingScene3IdeLoti2 = false
+                        scene3IdeLoti2?.isHidden = true
+                        scene3IdeLoti3?.isHidden = false
+                    } else if node == scene3IdeLoti3 {
+                        HapticUtils.hapticIde()
+                        node.position = originalPosition!
+                        
+                    } else {
+                        // If the touch location is not within the specified area, return the node to its original position
+                        print("drop failed")
+                        node.position = originalPosition!
+                    }
+                }
+            }
+        }
         
-        // Buat action untuk animasi slide
-        let slideAction = SKAction.move(to: slideTo, duration: 0.5)
-        slideAction.timingMode = .easeIn
         
-        // Jalankan action pada scene3IdeLoti2
-        scene3IdeLoti2?.run(slideAction)
+        //    // Override touchesBegan method to handle touch events
+        //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //        // Mendapatkan lokasi sentuhan saat ini
+        //        guard let touch = touches.first else { return }
+        //        let touchLocation = touch.location(in: self)
+        //
+        //        if scene3IdeLoti1.contains(touchLocation) {
+        //            isCircle = true
+        //            print("ini circle")
+        //        }
+        //    }
+        //
+        //    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //        // Mendapatkan lokasi sentuhan saat ini
+        //        guard let touch = touches.first else { return }
+        //        let touchLocation = touch.location(in: self)
+        //
+        //
+        ////        if isCircle {
+        //            scene3IdeLoti1.position = touchLocation
+        ////        }
+        //
+        //
+        //    }
+        //
+        //    // Fungsi untuk melakukan animasi slide pada scene3IdeLoti2
+        //    func slideScene3IdeLoti2() {
+        //        // Tentukan posisi slideTo untuk scene3IdeLoti2
+        //        let slideTo = CGPoint(x: 100, y: 0)
+        //
+        //        // Buat action untuk animasi slide
+        //        let slideAction = SKAction.move(to: slideTo, duration: 0.5)
+        //        slideAction.timingMode = .easeIn
+        //
+        //        // Jalankan action pada scene3IdeLoti2
+        //        scene3IdeLoti2?.run(slideAction)
+        //    }
+        //}
     }
 }

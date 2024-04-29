@@ -6,7 +6,7 @@ class HapticUtils {
     static var player: CHHapticAdvancedPatternPlayer? // Make player a static variable
     static var shouldContinueHaptic = true
     
-    static func runHaptic() {
+    static func runHaptic(duration: TimeInterval) {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else {
             print("Device does not support haptics")
             return
@@ -21,10 +21,10 @@ class HapticUtils {
             let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1)
             let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 1)
             
-            // Create haptic event
-            let event = CHHapticEvent(eventType: .hapticContinuous, parameters: [intensity, sharpness], relativeTime: 0, duration: 1)
+            // Create haptic event with the specified duration
+            let event = CHHapticEvent(eventType: .hapticContinuous, parameters: [intensity, sharpness], relativeTime: 0, duration: duration)
             
-            // Create haptic pattern with repeated events
+            // Create haptic pattern with the event
             let pattern = try CHHapticPattern(events: [event], parameters: [])
             
             // Create player for the haptic pattern
@@ -38,12 +38,18 @@ class HapticUtils {
             print("Error creating haptic engine: \(error)")
         }
     }
+
+    
+    static func hapticIde() {
+        let shorterDuration: TimeInterval = 0.5 // Adjust the duration as needed
+        runHaptic(duration: shorterDuration)
+    }
     
     static func runHapticOnBackgroundThreadWithinInterval(seconds: TimeInterval) {
         hapticQueue.async {
             // Repeat haptic feedback at the specified time interval until shouldContinueHaptic is false
             while shouldContinueHaptic {
-                runHaptic()
+                runHaptic(duration: 1)
                 Thread.sleep(forTimeInterval: seconds)
             }
         }
