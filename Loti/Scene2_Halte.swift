@@ -117,8 +117,6 @@ class Scene2_Halte: SKScene {
             gestureRecognizer.numberOfTouchesRequired = 1
             sceneContainingBubbleRed1.view?.addGestureRecognizer(gestureRecognizer)
         }
-        
-        
     }
     
     
@@ -165,7 +163,7 @@ class Scene2_Halte: SKScene {
                 // Tampilkan bubbleRed2 setelah menunggu
                 self.bubbleRed3?.isHidden = false
             }
-        
+            
         case 3:
             // Jika ini adalah swipe ketiga
             // Tentukan posisi baru untuk bubbleRed3 setelah pergeseran ketiga
@@ -192,19 +190,28 @@ class Scene2_Halte: SKScene {
             let slideUpAction = SKAction.move(to: newPosition, duration: 0.5)
             
             bubbleRed4?.zPosition = 21
-            // Jalankan action pada bubbleRed3
             bubbleRed4?.run(slideUpAction)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 // Unhide dengan transition slide dari kanan ke kiri
-                let slideDistance = self.size.width // Jarak pergeseran
-                let slideLeftAction = SKAction.moveBy(x: -(slideDistance + (slideDistance)/2), y: 0, duration: 0.5) // Menggeser ke kiri sejauh slideDistance dalam 0.5 detik
-                self.busBSD?.run(slideLeftAction)
+                /*let slideDistance = self.size.width*/ // Jarak pergeseran
+                let slideTo = CGPoint(x: 3.367, y: -2906.954)
+                let slideRightAction = SKAction.move(to: slideTo, duration: 2.5)
+                // Terapkan timing mode ease in pada slideRightAction
+                slideRightAction.timingMode = .easeIn
+                
+                self.busBSD?.run(slideRightAction) {
+                    // Navigasi ke Scene3_Diskusi setelah animasi selesai
+                    if let scene3Diskusi = Scene3_Diskusi(fileNamed: "Scene3_Diskusi") {
+                        scene3Diskusi.scaleMode = .aspectFill
+                        self.view?.presentScene(scene3Diskusi)
+                    }
+                }
             }
         default:
             break
         }
-                
+        
     }
     
     // Fungsi untuk menangani sentuhan di layar
@@ -226,7 +233,7 @@ class Scene2_Halte: SKScene {
     }
     
     
-
+    
     
     func rotateClockHandClockwise() {
         // Memeriksa apakah sudah ada rotasi yang sedang berlangsung
@@ -243,7 +250,6 @@ class Scene2_Halte: SKScene {
             } else if self.tapCount >= 11 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     self.cameraNode?.run(SKAction.move(to: CGPoint(x: self.bgHalte!.position.x, y: self.bgHalte!.position.y), duration: 1.0))
-                    
                     
                     // Menampilkan bubbleRed1 dan mengubah posisinya
                     self.bubbleRed1?.isHidden = false
@@ -274,5 +280,5 @@ class Scene2_Halte: SKScene {
     }
     
     
-
+    
 }

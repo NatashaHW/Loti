@@ -55,7 +55,7 @@ struct Transisi_Kamar: View {
             }
             
             
-//             Tampilkan SKViewRepresentable() ketika animasi selesai
+            //             Tampilkan SKViewRepresentable() ketika animasi selesai
             if animate {
                 SKViewRepresentable()
                     .frame(width: screenWidth, height: screenHeight, alignment: .center)

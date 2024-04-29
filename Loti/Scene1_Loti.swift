@@ -126,13 +126,14 @@ class Scene1_Loti: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // Memeriksa apakah emosi sudah dipilih sebelumnya
         guard !emotionSelected else { return }
-
+        
         // Mengambil sentuhan pertama
         guard let touch = touches.first else { return }
-
+        
         // Mendapatkan lokasi sentuhan
         let touchLocation = touch.location(in: self)
-
+        
+        
         // Memeriksa apakah emosi oranye dipilih
         if emotionOrange?.contains(touchLocation) ?? false {
             // User memilih emosi oranye
@@ -157,10 +158,10 @@ class Scene1_Loti: SKScene {
             showBubbleAndChat1(for: emotionBlue, chatNode: scene1ChatBlue, bubbleNode: bubbleBlue1)
             print("Blue Tapped \(tapCountBlue) times")
         }
-
+        
         // Setel bahwa emosi telah dipilih
         emotionSelected = true
-
+        
         // Memanggil friendsBubble setelah 1 detik
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.friendsBubble()
@@ -177,37 +178,35 @@ class Scene1_Loti: SKScene {
                     self.view?.presentScene(scene2, transition: SKTransition.moveIn(with: .right, duration: 2.0))
                 }
             }
-            
-            
         }
     }
-        
     
-        // Fungsi untuk menampilkan animasi getaran
-        func animateVibration(for node: SKSpriteNode?) {
-            guard let node = node else { return }
-            let rotateRight = SKAction.rotate(byAngle: CGFloat.pi / 18, duration: 0.05)
-            let rotateLeft = SKAction.rotate(byAngle: -CGFloat.pi / 18, duration: 0.05)
-            let sequence = SKAction.sequence([rotateRight, rotateLeft])
-            let repeatAction = SKAction.repeat(sequence, count: 4)
-            node.run(repeatAction)
-        }
+    
+    // Fungsi untuk menampilkan animasi getaran
+    func animateVibration(for node: SKSpriteNode?) {
+        guard let node = node else { return }
+        let rotateRight = SKAction.rotate(byAngle: CGFloat.pi / 18, duration: 0.05)
+        let rotateLeft = SKAction.rotate(byAngle: -CGFloat.pi / 18, duration: 0.05)
+        let sequence = SKAction.sequence([rotateRight, rotateLeft])
+        let repeatAction = SKAction.repeat(sequence, count: 4)
+        node.run(repeatAction)
+    }
+    
+    // Fungsi untuk menampilkan gelembung dan obrolan
+    func showBubbleAndChat1(for emotion: SKSpriteNode?, chatNode: SKSpriteNode?, bubbleNode: SKSpriteNode?) {
+        hideAllBubbleAndChat1()
+        guard let emotion = emotion, let chatNode = chatNode, let bubbleNode = bubbleNode else { return }
+        chatNode.isHidden = false
+        bubbleNode.isHidden = false
         
-        // Fungsi untuk menampilkan gelembung dan obrolan
-        func showBubbleAndChat1(for emotion: SKSpriteNode?, chatNode: SKSpriteNode?, bubbleNode: SKSpriteNode?) {
-            hideAllBubbleAndChat1()
-            guard let emotion = emotion, let chatNode = chatNode, let bubbleNode = bubbleNode else { return }
-            chatNode.isHidden = false
-            bubbleNode.isHidden = false
-            
-            // Mengatur posisi gelembung
-            bubbleNode.position.y -= 600
-            
-            // Animasi slide up untuk gelembung
-            let moveUp = SKAction.move(by: CGVector(dx: 0, dy: 600), duration: 0.3)
-            bubbleNode.run(moveUp)
-        }
+        // Mengatur posisi gelembung
+        bubbleNode.position.y -= 600
         
+        // Animasi slide up untuk gelembung
+        let moveUp = SKAction.move(by: CGVector(dx: 0, dy: 600), duration: 0.3)
+        bubbleNode.run(moveUp)
+    }
+    
     // Fungsi untuk menampilkan gelembung teman
     func friendsBubble() {
         hideAllFriendsBubble()
@@ -238,43 +237,43 @@ class Scene1_Loti: SKScene {
             friendsBubble1?.run(moveUp)
         }
     }
-
+    
     // Fungsi untuk menyembunyikan semua gelembung teman
     func hideAllFriendsBubble() {
         friendsBubble0?.isHidden = true
         friendsBubble1?.isHidden = true
     }
-
-        // Fungsi untuk menyembunyikan semua gelembung dan obrolan
-        func hideAllBubbleAndChat1() {
-            scene1ChatOrange?.isHidden = true
-            bubbleOrange1?.isHidden = true
-            scene1ChatYellow?.isHidden = true
-            bubbleYellow1?.isHidden = true
-            scene1ChatBlue?.isHidden = true
-            bubbleBlue1?.isHidden = true
-        }
-        
-        // Fungsi untuk menampilkan gelembung dan obrolan kedua
-        func showBubbleAndChat2(for emotion: SKSpriteNode?, chatNode: SKSpriteNode?, bubbleNode: SKSpriteNode?) {
-            hideAllBubbleAndChat2()
-            guard let emotion = emotion, let chatNode = chatNode, let bubbleNode = bubbleNode else { return }
-            chatNode.isHidden = false
-            bubbleNode.isHidden = false
-            
-            // Mengatur posisi gelembung
-            bubbleNode.position.y -= 200
-            
-            // Animasi slide up untuk gelembung
-            let moveUp = SKAction.move(by: CGVector(dx: 0, dy: 200), duration: 0.3)
-            bubbleNode.run(moveUp)
-        }
-        
-        // Fungsi untuk menyembunyikan semua gelembung dan obrolan kedua
-        func hideAllBubbleAndChat2() {
-            bubbleOrange2?.isHidden = true
-            bubbleYellow2?.isHidden = true
-            bubbleBlue2?.isHidden = true
-        }
+    
+    // Fungsi untuk menyembunyikan semua gelembung dan obrolan
+    func hideAllBubbleAndChat1() {
+        scene1ChatOrange?.isHidden = true
+        bubbleOrange1?.isHidden = true
+        scene1ChatYellow?.isHidden = true
+        bubbleYellow1?.isHidden = true
+        scene1ChatBlue?.isHidden = true
+        bubbleBlue1?.isHidden = true
     }
     
+    // Fungsi untuk menampilkan gelembung dan obrolan kedua
+    func showBubbleAndChat2(for emotion: SKSpriteNode?, chatNode: SKSpriteNode?, bubbleNode: SKSpriteNode?) {
+        hideAllBubbleAndChat2()
+        guard let emotion = emotion, let chatNode = chatNode, let bubbleNode = bubbleNode else { return }
+        chatNode.isHidden = false
+        bubbleNode.isHidden = false
+        
+        // Mengatur posisi gelembung
+        bubbleNode.position.y -= 200
+        
+        // Animasi slide up untuk gelembung
+        let moveUp = SKAction.move(by: CGVector(dx: 0, dy: 200), duration: 0.3)
+        bubbleNode.run(moveUp)
+    }
+    
+    // Fungsi untuk menyembunyikan semua gelembung dan obrolan kedua
+    func hideAllBubbleAndChat2() {
+        bubbleOrange2?.isHidden = true
+        bubbleYellow2?.isHidden = true
+        bubbleBlue2?.isHidden = true
+    }
+}
+
