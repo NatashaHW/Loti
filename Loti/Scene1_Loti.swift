@@ -185,13 +185,35 @@ class Scene1_Loti: SKScene {
             let location = touch.location(in: self)
             if let node = self.nodes(at: location).first {
                 if node == phoneAlarm && vibrating == true {
-                    stopVibration()
-                    print ("\(vibrating)")
-                    HapticUtils.stopHaptic()
-                } else {
-                    print ("\(vibrating)")
+                    stopVibrationAndMoveCamera()
                 }
             }
         }
     }
+    
+    func stopVibrationAndMoveCamera() {
+        stopVibration()
+
+        // Menunggu 2 detik
+        let waitDuration = SKAction.wait(forDuration: 2.0)
+        
+        // Menggerakkan kamera ke scene1Yawn1
+        let moveCameraAction = SKAction.move(to: scene1Yawn1!.position, duration: 1.0)
+        cameraNode?.run(SKAction.sequence([waitDuration, moveCameraAction]))
+        
+        // Menampilkan scene1Yawn2 setelah menunggu 0.8 detik
+        let showScene1Yawn2Action = SKAction.run {
+            self.scene1Yawn2?.isHidden = false
+        }
+        let waitToShowScene1Yawn2 = SKAction.wait(forDuration: 0.8)
+        let sequenceToShowScene1Yawn2 = SKAction.sequence([waitToShowScene1Yawn2, showScene1Yawn2Action])
+        run(sequenceToShowScene1Yawn2)
+        
+        // Menggerakkan kamera ke scene1ChatBNW setelah menunggu 0.8 detik lagi
+        let moveCameraToChatAction = SKAction.move(to: scene1ChatBNW!.position, duration: 1.0)
+        let waitBeforeMoveCameraToChat = SKAction.wait(forDuration: 0.8)
+        let sequenceMoveCameraToChat = SKAction.sequence([waitBeforeMoveCameraToChat, moveCameraToChatAction])
+        cameraNode?.run(sequenceMoveCameraToChat)
+    }
+
 }
