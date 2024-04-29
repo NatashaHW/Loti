@@ -1,4 +1,3 @@
-
 import SpriteKit
 
 class Scene2_Halte: SKScene {
@@ -32,6 +31,10 @@ class Scene2_Halte: SKScene {
     
     var tapCount = 0
     var swipeCount = 0
+    
+    // Create a feedback generator instance for selection feedback
+    let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+    
     
     override func didMove(to view: SKView) {
         // Mengatur latar belakang menjadi warna putih
@@ -214,71 +217,76 @@ class Scene2_Halte: SKScene {
         
     }
     
-    // Fungsi untuk menangani sentuhan di layar
+    // Override touchesBegan method to handle touch events
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         // Mendapatkan lokasi sentuhan saat ini
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
+        
         // Cek apakah sentuhan terjadi di area scene2Clock atau scene2ClockHand
-        if let clock = scene2Clock, clock.contains(touchLocation) {
-            // Memulai rotasi scene2ClockHand searah jarum jam
-            rotateClockHandClockwise()
-            tapCount += 1
-        } else if let clockHand = scene2ClockHand, clockHand.contains(touchLocation) {
-            // Memulai rotasi scene2ClockHand searah jarum jam
-            rotateClockHandClockwise()
-            tapCount += 1
-        }
-    }
-    
-    
-    
-    
-    func rotateClockHandClockwise() {
-        // Memeriksa apakah sudah ada rotasi yang sedang berlangsung
-        guard !isScene2ClockHandRotating else { return }
-        
-        // Memulai animasi rotasi
-        let rotateAction = SKAction.rotate(byAngle: -CGFloat.pi / 6, duration: 0.2) // Rotasi sebesar 30 derajat (π/6 radian) dalam 0.2 detik
-        let rotateSequence = SKAction.sequence([rotateAction, SKAction.run {
-            // Memeriksa apakah scene2ClockHand sudah berputar sebanyak 200 derajat
-            if self.tapCount >= 5 && self.tapCount < 10 {
-                self.scene2Color1?.isHidden = false
-            } else if self.tapCount == 10 {
-                self.scene2Color2?.isHidden = false
-            } else if self.tapCount >= 11 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.cameraNode?.run(SKAction.move(to: CGPoint(x: self.bgHalte!.position.x, y: self.bgHalte!.position.y), duration: 1.0))
+                if let clock = scene2Clock, clock.contains(touchLocation) {
+                    // Memulai rotasi scene2ClockHand searah jarum jam
+                    rotateClockHandClockwise()
+                    tapCount += 1
+                    // Provide impact haptic feedback
+                    impactFeedbackGenerator.impactOccurred()
                     
-                    // Menampilkan bubbleRed1 dan mengubah posisinya
-                    self.bubbleRed1?.isHidden = false
-                    self.bubbleRed1?.position = CGPoint(x: -12, y: -3540)
-                    self.bubbleRed1?.zPosition = 35
-                    
-                    self.bubbleRed2?.position = CGPoint(x: 2, y: -3540)
-                    self.bubbleRed2?.zPosition = 36
-                    
-                    self.bubbleRed3?.position = CGPoint(x: 8.65, y: -3540)
-                    self.bubbleRed3?.zPosition = 37
-                    
-                    self.bubbleRed4?.position = CGPoint(x: 25.037, y: -3540)
-                    self.bubbleRed4?.zPosition = 38
-                    
+                } else if let clockHand = scene2ClockHand, clockHand.contains(touchLocation) {
+                    // Memulai rotasi scene2ClockHand searah jarum jam
+                    rotateClockHandClockwise()
+                    tapCount += 1
+                    // Provide impact haptic feedback
+                    impactFeedbackGenerator.impactOccurred()
                 }
+        
+        
+        
+        
+        func rotateClockHandClockwise() {
+            // Memeriksa apakah sudah ada rotasi yang sedang berlangsung
+            guard !isScene2ClockHandRotating else { return }
+            
+            // Memulai animasi rotasi
+            let rotateAction = SKAction.rotate(byAngle: -CGFloat.pi / 6, duration: 0.2) // Rotasi sebesar 30 derajat (π/6 radian) dalam 0.2 detik
+            let rotateSequence = SKAction.sequence([rotateAction, SKAction.run {
+                // Memeriksa apakah scene2ClockHand sudah berputar sebanyak 200 derajat
+                if self.tapCount >= 5 && self.tapCount < 10 {
+                    self.scene2Color1?.isHidden = false
+                } else if self.tapCount == 10 {
+                    self.scene2Color2?.isHidden = false
+                } else if self.tapCount >= 11 {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self.cameraNode?.run(SKAction.move(to: CGPoint(x: self.bgHalte!.position.x, y: self.bgHalte!.position.y), duration: 1.0))
+                        
+                        // Menampilkan bubbleRed1 dan mengubah posisinya
+                        self.bubbleRed1?.isHidden = false
+                        self.bubbleRed1?.position = CGPoint(x: -12, y: -3540)
+                        self.bubbleRed1?.zPosition = 35
+                        
+                        self.bubbleRed2?.position = CGPoint(x: 2, y: -3540)
+                        self.bubbleRed2?.zPosition = 36
+                        
+                        self.bubbleRed3?.position = CGPoint(x: 8.65, y: -3540)
+                        self.bubbleRed3?.zPosition = 37
+                        
+                        self.bubbleRed4?.position = CGPoint(x: 25.037, y: -3540)
+                        self.bubbleRed4?.zPosition = 38
+                        
+                    }
+                }
+            }])
+            
+            // Menandai bahwa rotasi sedang berlangsung
+            isScene2ClockHandRotating = true
+            
+            // Memulai animasi rotasi
+            scene2ClockHand?.run(rotateSequence) {
+                // Menandai bahwa rotasi telah selesai
+                self.isScene2ClockHandRotating = false
             }
-        }])
-        
-        // Menandai bahwa rotasi sedang berlangsung
-        isScene2ClockHandRotating = true
-        
-        // Memulai animasi rotasi
-        scene2ClockHand?.run(rotateSequence) {
-            // Menandai bahwa rotasi telah selesai
-            self.isScene2ClockHandRotating = false
         }
+        
+        
+        
     }
-    
-    
-    
 }
