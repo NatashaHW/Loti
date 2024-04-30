@@ -19,6 +19,8 @@ class Scene2_Halte: SKScene {
     var bubbleRed3: SKSpriteNode?
     var bubbleRed4: SKSpriteNode?
     
+    var radarJam: SKSpriteNode?
+    
     var bubbleRed1Tap: SKSpriteNode?
     var bubbleRed2Tap: SKSpriteNode?
     var bubbleRed3Tap: SKSpriteNode?
@@ -50,7 +52,6 @@ class Scene2_Halte: SKScene {
         scene2BNW2 = childNode(withName: "//scene2BNW2") as? SKSpriteNode
         scene2Color1 = childNode(withName: "//scene2Color1") as? SKSpriteNode
         scene2Color2 = childNode(withName: "//scene2Color2") as? SKSpriteNode
-        scene2Instruction = childNode(withName: "//scene2Instruction") as? SKSpriteNode
         scene2ClockHand = childNode(withName: "//scene2ClockHand") as? SKSpriteNode
         scene2Clock = childNode(withName: "//scene2Clock") as? SKSpriteNode
         scene2BgClock = childNode(withName: "//scene2BgClock") as? SKSpriteNode
@@ -68,13 +69,14 @@ class Scene2_Halte: SKScene {
         bubbleRed3Tap = childNode(withName: "//bubbleRed3Tap") as? SKSpriteNode
         bubbleRed4Tap = childNode(withName: "//bubbleRed4Tap") as? SKSpriteNode
         
+        radarJam = childNode(withName: "//radarJam") as? SKSpriteNode
+        
         busBSD = childNode(withName: "busBSD") as? SKSpriteNode
         
         // Sembunyikan node yang tidak terlihat pada awalnya
         scene2BNW2?.isHidden = true
         scene2Color1?.isHidden = true
         scene2Color2?.isHidden = true
-        scene2Instruction?.isHidden = true
         scene2ClockHand?.isHidden = true
         scene2Clock?.isHidden = true
         scene2BgClock?.isHidden = true
@@ -89,6 +91,7 @@ class Scene2_Halte: SKScene {
         bubbleRed2Tap?.isHidden = true
         bubbleRed3Tap?.isHidden = true
         bubbleRed4Tap?.isHidden = true
+        radarJam?.isHidden = true
         
         // Mulai animasi setelah beberapa detik
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -99,14 +102,14 @@ class Scene2_Halte: SKScene {
             // Unhide dengan transition slide dari kanan ke kiri
             let slideDistance = self.size.width // Jarak pergeseran
             let slideLeftAction = SKAction.moveBy(x: -slideDistance, y: 0, duration: 0.5) // Menggeser ke kiri sejauh slideDistance dalam 0.5 detik
-            self.scene2Instruction?.run(slideLeftAction)
             self.scene2ClockHand?.run(slideLeftAction)
+            self.radarJam?.run(slideLeftAction)
             self.scene2Clock?.run(slideLeftAction)
             self.scene2BgClock?.run(slideLeftAction)
             self.scene2Hand?.run(slideLeftAction)
             
-            self.scene2Instruction?.isHidden = true
             self.scene2ClockHand?.isHidden = false
+            self.radarJam?.isHidden = false
             self.scene2Clock?.isHidden = false
             self.scene2BgClock?.isHidden = false
             self.scene2Hand?.isHidden = false
