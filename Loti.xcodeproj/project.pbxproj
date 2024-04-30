@@ -32,6 +32,7 @@
 		F4D0A1B92BDF95BE00E1D553 /* Scene7_Hug.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4D0A1B82BDF95BE00E1D553 /* Scene7_Hug.sks */; };
 		F4F75AE52BDF9B4A00225E98 /* HomePlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4F75AE42BDF9B4A00225E98 /* HomePlay.sks */; };
 		F4F75AE72BDF9C1300225E98 /* Replay.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4F75AE62BDF9C1300225E98 /* Replay.sks */; };
+		F4F75AEB2BDFA91600225E98 /* Scene4_Envy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F75AEA2BDFA91600225E98 /* Scene4_Envy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		F4D0A1B82BDF95BE00E1D553 /* Scene7_Hug.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene7_Hug.sks; sourceTree = "<group>"; };
 		F4F75AE42BDF9B4A00225E98 /* HomePlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HomePlay.sks; sourceTree = "<group>"; };
 		F4F75AE62BDF9C1300225E98 /* Replay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Replay.sks; sourceTree = "<group>"; };
+		F4F75AEA2BDFA91600225E98 /* Scene4_Envy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene4_Envy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				400AF3ED2BDACDE4002B604B /* Scene2_Halte.swift */,
 				4088B9442BE01CEB0072CBF0 /* Scene2.swift */,
 				401E15372BDE2AA6007E117A /* Scene3_Diskusi.swift */,
+				F4F75AEA2BDFA91600225E98 /* Scene4_Envy.swift */,
 				40B8178B2BDF926700FF63AE /* Haptics.swift */,
 				F4F75AE42BDF9B4A00225E98 /* HomePlay.sks */,
 				40CE6FBD2BD9F09C005DA0BB /* Scene1_Loti.sks */,
@@ -314,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4F75AEB2BDFA91600225E98 /* Scene4_Envy.swift in Sources */,
 				400AF3F22BDB91F1002B604B /* Scene1_Loti.swift in Sources */,
 				401E15382BDE2AA6007E117A /* Scene3_Diskusi.swift in Sources */,
 				40CE6FC42BD9F09C005DA0BB /* GameViewController.swift in Sources */,
@@ -504,7 +508,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6Y742356Q3;
+				DEVELOPMENT_TEAM = 7C5WNJ9MAB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -532,7 +536,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6Y742356Q3;
+				DEVELOPMENT_TEAM = 7C5WNJ9MAB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
