@@ -87,9 +87,9 @@ class Scene1_Loti: SKScene {
         sembunyikan?.isHidden = false
         sembunyikan?.zPosition = 50
         
-//        scene1ChatOrange?.zPosition = 35
-//        scene1ChatYellow?.zPosition = 35
-//        scene1ChatBlue?.zPosition = 35
+        //        scene1ChatOrange?.zPosition = 35
+        //        scene1ChatYellow?.zPosition = 35
+        //        scene1ChatBlue?.zPosition = 35
         
         //alarm
         vibrateAlarm()
@@ -192,16 +192,22 @@ class Scene1_Loti: SKScene {
         return newBubbleBlue
     }
     
-    func createNewFriendBubble0() -> SKSpriteNode {
-        let newFriendBubble0 = SKSpriteNode(imageNamed: "Bubble Temen Biru")
-        newFriendBubble0.zPosition = 40
-        return newFriendBubble0
+    func createNewFriendBubbleBlue() -> SKSpriteNode {
+        let newFriendBubbleBlue = SKSpriteNode(imageNamed: "Bubble Temen Biru")
+        newFriendBubbleBlue.zPosition = 40
+        return newFriendBubbleBlue
     }
     
-    func createNewFriendBubble1() -> SKSpriteNode {
-        let newFriendBubble1 = SKSpriteNode(imageNamed: "Bubble Temen Kuning")
-        newFriendBubble1.zPosition = 40
-        return newFriendBubble1
+    func createNewFriendBubbleYellow() -> SKSpriteNode {
+        let newFriendBubbleYellow = SKSpriteNode(imageNamed: "Bubble Temen Kuning")
+        newFriendBubbleYellow.zPosition = 40
+        return newFriendBubbleYellow
+    }
+    
+    func createNewFriendBubbleOrange() -> SKSpriteNode {
+        let newFriendBubbleOrange = SKSpriteNode(imageNamed: "Bubble Temen Orange")
+        newFriendBubbleOrange.zPosition = 40
+        return newFriendBubbleOrange
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -220,7 +226,9 @@ class Scene1_Loti: SKScene {
                     scene1ChatOrange?.isHidden = false
                     
                     let newBubbleOrange = createNewBubbleOrange()
-                    showBubbleAndFriendsBubble(bubble: newBubbleOrange)
+                    let newFriendBubbleOrange = self.createNewFriendBubbleOrange()
+                    newFriendBubbleOrange.position = CGPoint(x: -233, y: -3700)
+                    showBubbleAndFriendsBubble(bubble: newBubbleOrange, friendBubbble: newFriendBubbleOrange)
                     
                     // Memberi feedback haptic ringan
                     giveLightHapticFeedback()
@@ -234,7 +242,9 @@ class Scene1_Loti: SKScene {
                     scene1ChatOrange?.isHidden = true
                     
                     let newBubbleYellow = createNewBubbleYellow()
-                    showBubbleAndFriendsBubble(bubble: newBubbleYellow)
+                    let newFriendBubbleYellow = self.createNewFriendBubbleYellow()
+                    newFriendBubbleYellow.position = CGPoint(x: -233, y: -3700)
+                    showBubbleAndFriendsBubble(bubble: newBubbleYellow, friendBubbble: newFriendBubbleYellow)
                     
                     // Memberi feedback haptic ringan
                     giveLightHapticFeedback()
@@ -248,7 +258,9 @@ class Scene1_Loti: SKScene {
                     scene1ChatOrange?.isHidden = true
                     
                     let newBubbleBlue = createNewBubbleBlue()
-                    showBubbleAndFriendsBubble(bubble: newBubbleBlue)
+                    let newFriendBubbleBlue = self.createNewFriendBubbleBlue()
+                    newFriendBubbleBlue.position = CGPoint(x: -233, y: -3700)
+                    showBubbleAndFriendsBubble(bubble: newBubbleBlue, friendBubbble: newFriendBubbleBlue)
                     
                     // Memberi feedback haptic ringan
                     giveLightHapticFeedback()
@@ -270,13 +282,13 @@ class Scene1_Loti: SKScene {
             }
         }
     }
-
+    
     func giveLightHapticFeedback() {
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
     }
-
-
+    
+    
     
     
     func stopVibrationAndMoveCamera() {
@@ -302,73 +314,59 @@ class Scene1_Loti: SKScene {
         cameraNode?.run(SKAction.sequence([sequenceToShowScene1Yawn1, sequenceToShowScene1Yawn2, sequenceMoveCameraToChat]))
     }
     
-    func showBubbleAndFriendsBubble(bubble: SKSpriteNode?) {
-            guard let bubble = bubble else { return }
-            
-            // Menampilkan gelembung baru pada posisi awal
-            bubble.position = CGPoint(x: -233, y: -3650)
-            addChild(bubble)
-            
-            // Menunggu selama 1.5 detik sebelum menampilkan gelembung teman
-            let waitToShowFriendsBubble = SKAction.wait(forDuration: 0.2)
-            
-            // Menggeser gelembung dan gelembung teman setelah menunggu 1.5 detik
-            let moveUpAction = SKAction.moveBy(x: 0, y: 200, duration: 0.3)
-            let moveUpActionForFriends = SKAction.moveBy(x: 0, y: 500, duration: 0.3)
-            let moveUpSequence = SKAction.sequence([waitToShowFriendsBubble, moveUpAction])
-            
-            // Menjalankan urutan aksi untuk gelembung baru
-            bubble.run(moveUpSequence) {
-                // Menampilkan gelembung teman setelah gelembung baru digeser
-                let friendsBubbleIndex = Int.random(in: 0...1)
-                if friendsBubbleIndex == 0 {
-                    let newFriendBubble0 = self.createNewFriendBubble0()
-                    newFriendBubble0.position = CGPoint(x: -233, y: -3700)
-                    self.addChild(newFriendBubble0)
-                    self.allFriendBubbles.append(newFriendBubble0)
-                    self.scene1ChatOrange?.isHidden = true
-                    self.scene1ChatBlue?.isHidden = false
-                    self.scene1ChatYellow?.isHidden = true
-                } else {
-                    let newFriendBubble1 = self.createNewFriendBubble1()
-                    newFriendBubble1.position = CGPoint(x: -233, y: -3700)
-                    self.addChild(newFriendBubble1)
-                    self.allFriendBubbles.append(newFriendBubble1)
-                    self.scene1ChatOrange?.isHidden = true
-                    self.scene1ChatBlue?.isHidden = true
-                    self.scene1ChatYellow?.isHidden = false
-                }
-            }
-            
-            // Menggeser semua gelembung dan gelembung teman setelah menunggu 1.5 detik
-            for existingBubble in allBubbles {
-                existingBubble.run(moveUpActionForFriends)
-                // Periksa apakah gelembung telah mencapai batas atas layar
-                if existingBubble.position.y >= frame.maxY {
-                    // Hapus gelembung dari tampilan dan dari daftar
-                    existingBubble.removeFromParent()
-                    if let index = allBubbles.firstIndex(of: existingBubble) {
-                        allBubbles.remove(at: index)
-                    }
-                }
-            }
-            
-            for friendBubble in allFriendBubbles {
-                friendBubble.run(moveUpActionForFriends)
-                // Periksa apakah gelembung teman telah mencapai batas atas layar
-                if friendBubble.position.y >= frame.maxY {
-                    // Hapus gelembung teman dari tampilan dan dari daftar
-                    friendBubble.removeFromParent()
-                    if let index = allFriendBubbles.firstIndex(of: friendBubble) {
-                        allFriendBubbles.remove(at: index)
-                    }
-                }
-            }
-            
-            allBubbles.append(bubble)
+    func showBubbleAndFriendsBubble(bubble: SKSpriteNode?, friendBubbble: SKSpriteNode?) {
+        guard let bubble = bubble else { return }
+        
+        let friendBubble = friendBubbble
+        
+        // Menampilkan gelembung baru pada posisi awal
+        bubble.position = CGPoint(x: -233, y: -3650)
+        addChild(bubble)
+        
+        // Menunggu selama 1.5 detik sebelum menampilkan gelembung teman
+        let waitToShowFriendsBubble = SKAction.wait(forDuration: 0.2)
+        
+        // Menggeser gelembung dan gelembung teman setelah menunggu 1.5 detik
+        let moveUpAction = SKAction.moveBy(x: 0, y: 200, duration: 0.3)
+        let moveUpActionForFriends = SKAction.moveBy(x: 0, y: 500, duration: 0.3)
+        let moveUpSequence = SKAction.sequence([waitToShowFriendsBubble, moveUpAction])
+        
+        // Menjalankan urutan aksi untuk gelembung baru
+        bubble.run(moveUpSequence) {
+            // Menampilkan gelembung teman setelah gelembung baru digeser
+            self.addChild(friendBubble!)
+            self.allFriendBubbles.append(friendBubble!)
         }
-
-
+        
+        // Menggeser semua gelembung dan gelembung teman setelah menunggu 1.5 detik
+        for existingBubble in allBubbles {
+            existingBubble.run(moveUpActionForFriends)
+            // Periksa apakah gelembung telah mencapai batas atas layar
+            if existingBubble.position.y >= frame.maxY {
+                // Hapus gelembung dari tampilan dan dari daftar
+                existingBubble.removeFromParent()
+                if let index = allBubbles.firstIndex(of: existingBubble) {
+                    allBubbles.remove(at: index)
+                }
+            }
+        }
+        
+        for friendBubble in allFriendBubbles {
+            friendBubble.run(moveUpActionForFriends)
+            // Periksa apakah gelembung teman telah mencapai batas atas layar
+            if friendBubble.position.y >= frame.maxY {
+                // Hapus gelembung teman dari tampilan dan dari daftar
+                friendBubble.removeFromParent()
+                if let index = allFriendBubbles.firstIndex(of: friendBubble) {
+                    allFriendBubbles.remove(at: index)
+                }
+            }
+        }
+        
+        allBubbles.append(bubble)
+    }
+    
+    
     
     
     func animateVibration(for node: SKSpriteNode?) {
