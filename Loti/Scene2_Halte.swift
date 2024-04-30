@@ -105,7 +105,7 @@ class Scene2_Halte: SKScene {
             self.scene2BgClock?.run(slideLeftAction)
             self.scene2Hand?.run(slideLeftAction)
             
-            self.scene2Instruction?.isHidden = false
+            self.scene2Instruction?.isHidden = true
             self.scene2ClockHand?.isHidden = false
             self.scene2Clock?.isHidden = false
             self.scene2BgClock?.isHidden = false

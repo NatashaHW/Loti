@@ -1,6 +1,7 @@
 import SpriteKit
 
 class Scene3_Diskusi: SKScene {
+    var sembunyikan: SKSpriteNode?
     
     var bgDiskusi: SKSpriteNode?
     var lotiBNW: SKSpriteNode?
@@ -21,9 +22,7 @@ class Scene3_Diskusi: SKScene {
     var busBSD: SKSpriteNode?
     
     var cameraNode: SKCameraNode?
-    
-    var isCircle = false
-    //    fileprivate let scene3IdeLoti1 = UIImageView(image: UIImage(named: "IdeLoti1"))
+        //    fileprivate let scene3IdeLoti1 = UIImageView(image: UIImage(named: "IdeLoti1"))
     
     //cek node mana yg lagi di drag
     var isDraggingScene3IdeLoti1 = false
@@ -93,6 +92,19 @@ class Scene3_Diskusi: SKScene {
         
     }
     
+    // Fungsi untuk melakukan animasi slide pada scene3IdeLoti2
+//    func slideScene3IdeLoti2() {
+//        // Tentukan posisi slideTo untuk scene3IdeLoti2
+//        let slideTo = CGPoint(x: 100, y: 0)
+//
+//        // Buat action untuk animasi slide
+//        let slideAction = SKAction.move(to: slideTo, duration: 0.5)
+//        slideAction.timingMode = .easeIn
+//
+//        // Jalankan action pada scene3IdeLoti2
+//        scene3IdeLoti2?.run(slideAction)
+//    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
@@ -129,9 +141,9 @@ class Scene3_Diskusi: SKScene {
             
             if let node = self.nodes(at: location).first as? SKSpriteNode {
                 // Ensure you have the original position stored somewhere
-                guard let originalPos = originalPosition else {
-                    return
-                }
+//                guard let originalPos = originalPosition else {
+//                    return
+//                }
                 
                 // Check if the touch location is within the specified area
                 if location.x > 260 {
@@ -185,18 +197,6 @@ class Scene3_Diskusi: SKScene {
         //
         //    }
         //
-        //    // Fungsi untuk melakukan animasi slide pada scene3IdeLoti2
-        //    func slideScene3IdeLoti2() {
-        //        // Tentukan posisi slideTo untuk scene3IdeLoti2
-        //        let slideTo = CGPoint(x: 100, y: 0)
-        //
-        //        // Buat action untuk animasi slide
-        //        let slideAction = SKAction.move(to: slideTo, duration: 0.5)
-        //        slideAction.timingMode = .easeIn
-        //
-        //        // Jalankan action pada scene3IdeLoti2
-        //        scene3IdeLoti2?.run(slideAction)
-        //    }
-        //}
+        
     }
 }
