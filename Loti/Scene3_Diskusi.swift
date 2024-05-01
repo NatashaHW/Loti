@@ -175,7 +175,18 @@ class Scene3_Diskusi: SKScene {
                         HapticUtils.hapticIde()
                         node.position = originalPosition!
                         
-                        //panggil scene bawah scroll disini
+                        //Tunggu, 1.5 detik, kemudian panggil dan scroll ke Scene4_Envy
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            // Panggil Scene2_Halte
+                            if let scene4 = Scene4_Envy(fileNamed: "Scene4_Envy") {
+                                // Setup scene yang baru
+                                scene4.scaleMode = .aspectFill
+                                // Transisi ke scene baru
+                                self.view?.presentScene(scene4, transition: SKTransition.push(with: .up, duration: 2.0))
+                                
+                            }
+                        }
                     }}
                 else {
                     // If the touch location is not within the specified area, return the node to its original position

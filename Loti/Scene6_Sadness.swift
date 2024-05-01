@@ -2,23 +2,16 @@ import SpriteKit
 
 class Scene6_Sadness: SKScene {
     
-    var scene4_envy1: SKSpriteNode?
-    var scene4_envy2: SKSpriteNode?
-    var background_before: SKSpriteNode?
-    var background_after: SKSpriteNode?
-    var Lita: SKSpriteNode?
-    var Loti: SKSpriteNode?
-    var slider: SKSpriteNode?
-    var button: SKSpriteNode?
+    var sadBefore: SKSpriteNode?
+    var sadAfter: SKSpriteNode?
+    var cryAfter: SKSpriteNode?
+    var cryBefore: SKSpriteNode?
     
     var cameraNode: SKCameraNode?
     
-    // Variabel untuk menyimpan posisi awal sentuhan pada button
-    var initialTouchPosition: CGPoint?
+    var score: Int = 0
     
-    // Batasan geseran button di sisi kanan dan kiri layar
-    let maxLeftPosition: CGFloat = 20
-    let maxRightPosition: CGFloat = UIScreen.main.bounds.width - 20 // Menggunakan lebar layar
+    var canSpawnWater: Bool = true // Variabel untuk menandai apakah air masih boleh di-spawn
     
     override func didMove(to view: SKView) {
         // Mengatur latar belakang menjadi warna putih
@@ -30,32 +23,57 @@ class Scene6_Sadness: SKScene {
         addChild(cameraNode!)
         
         // Mengambil node dari scene
-        scene4_envy1 = childNode(withName: "//scene4_envy1") as? SKSpriteNode
-        scene4_envy2 = childNode(withName: "//scene4_envy2") as? SKSpriteNode
-        background_before = childNode(withName: "//background_before") as? SKSpriteNode
-        background_after = childNode(withName: "//background_after") as? SKSpriteNode
-        Lita = childNode(withName: "//Lita") as? SKSpriteNode
-        Loti = childNode(withName: "//Loti") as? SKSpriteNode
-        slider = childNode(withName: "//slider") as? SKSpriteNode
-        button = childNode(withName: "//button") as? SKSpriteNode
+        sadBefore = childNode(withName: "//sadBefore") as? SKSpriteNode
+        sadAfter = childNode(withName: "//sadAfter") as? SKSpriteNode
+        cryAfter = childNode(withName: "//cryAfter") as? SKSpriteNode
+        cryBefore = childNode(withName: "//cryBefore") as? SKSpriteNode
         
-        // Sembunyikan scene4_envy2 dan tunjukkan scene4_envy1
-        scene4_envy1?.isHidden = false
-        scene4_envy2?.isHidden = true
-        background_after?.isHidden = true
+        sadBefore?.isHidden = false
+        sadAfter?.isHidden = true
+        cryAfter?.isHidden = true
+        cryBefore?.isHidden = false
         
-        // Setelah 1 detik, tunjukkan scene4_envy2
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.scene4_envy2?.isHidden = false
+            self.sadAfter?.isHidden = false
         }
         
-        // Setelah 0.8 detik lagi, scroll ke background_before
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            if let backgroundBefore = self.background_before {
-                let moveAction = SKAction.move(to: backgroundBefore.position, duration: 1.5)
+            if let cryBefore = self.cryBefore {
+                let moveAction = SKAction.move(to: cryBefore.position, duration: 1.5)
                 self.cameraNode?.run(moveAction)
+                
+                // Start spawning water if canSpawnWater is true
+                if self.canSpawnWater {
+                    self.spawnWater()
+                }
             }
         }
+        
+    }
+    
+    func spawnWater() {
+        run(SKAction.repeatForever(SKAction.sequence([
+            SKAction.run(spawnSingleWater),
+            SKAction.wait(forDuration: 1.0)
+        ])))
+    }
+    
+    func spawnSingleWater() {
+        let waterIndex = Int.random(in: 1...2)
+        let water = SKSpriteNode(imageNamed: "water\(waterIndex)")
+        water.name = "water"
+        
+        let randomX = CGFloat.random(in: -size.width/2...size.width/2)
+        let waterY = size.height/2 + water.size.height/2
+        water.position = CGPoint(x: randomX, y: waterY)
+        water.zPosition = 30
+        water.setScale(1.5)
+        
+        addChild(water)
+        
+        let moveAction = SKAction.moveTo(y: (-size.height/2 - water.size.height) * 3, duration: 6.0)
+        let removeAction = SKAction.removeFromParent()
+        water.run(SKAction.sequence([moveAction, removeAction]))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -63,50 +81,24 @@ class Scene6_Sadness: SKScene {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
         
-        // Cek apakah sentuhan terjadi di button
-        if let button = button, button.contains(touchLocation) {
-            // Simpan posisi awal sentuhan
-            initialTouchPosition = touchLocation
+        // Cek apakah sentuhan terjadi di air
+        let touchedNode = atPoint(touchLocation)
+        if touchedNode.name == "water" {
+            touchedNode.removeFromParent()
+            score += 1
+            print("Score:", score)
+            
+            print(score)
+            
+            // Cek apakah sudah mencapai skor 10
+            if score == 10 {
+                canSpawnWater = false // Setel variabel untuk tidak lagi bisa spawn air
+                cryAfter?.isHidden = false
+                print("score sudah 10")
+                
+                // Menghentikan semua aksi yang diulang, termasuk spawnWater()
+                self.removeAllActions()
+            }
         }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // Mendapatkan lokasi sentuhan
-        guard let touch = touches.first, let button = button, let initialTouchPosition = initialTouchPosition else { return }
-        let touchLocation = touch.location(in: self)
-        
-        // Hitung pergeseran sentuhan
-        let deltaX = touchLocation.x - initialTouchPosition.x
-        
-        // Jika pergeseran sentuhan adalah ke arah kanan, lakukan pergeseran pada button
-        if deltaX > 0 {
-            // Hitung posisi baru button
-            var newPositionX = button.position.x + deltaX
-            
-            // Batasi posisi button agar tidak melewati batas kanan layar
-            newPositionX = min(newPositionX, maxRightPosition)
-            
-            // Tetapkan posisi baru button
-            button.position.x = newPositionX
-            
-            // Geser Lita ke kiri secara otomatis
-            Lita?.position.x -= (deltaX / 2 + 1)
-            
-            // Geser Loti ke kanan secara otomatis
-            Loti?.position.x += (deltaX / 2 + 5)
-            
-        }
-        
-        // Update posisi awal sentuhan
-        self.initialTouchPosition = touchLocation
-    }
-
-
-
-
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // Reset posisi awal sentuhan
-        initialTouchPosition = nil
     }
 }
