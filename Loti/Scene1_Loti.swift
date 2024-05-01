@@ -101,7 +101,7 @@ class Scene1_Loti: SKScene {
         scene1SleepColor.size = CGSize(width: 1179, height: 2421)
         
         //buat shape lingkaran utk mask
-        let maskNode = SKShapeNode(circleOfRadius: 100)
+        let maskNode = SKShapeNode(circleOfRadius: 1)
         maskNode.fillColor = .black
         maskNode.position = CGPoint(x:self.phoneAlarm!.position.x, y:self.phoneAlarm!.position.y)
         
@@ -122,7 +122,7 @@ class Scene1_Loti: SKScene {
         let mask = cropNode.maskNode as? SKShapeNode
         if vibrating==false {
             // Enlarge the mask node when not vibrating
-            mask?.run(SKAction.scale(to: 20, duration: 1))
+            mask?.run(SKAction.scale(to: 2000, duration: 2.5))
         }
     }
     

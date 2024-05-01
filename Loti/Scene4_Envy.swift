@@ -20,6 +20,9 @@ class Scene4_Envy: SKScene {
     let maxLeftPosition: CGFloat = 20
     let maxRightPosition: CGFloat = UIScreen.main.bounds.width - 20 // Menggunakan lebar layar
     
+    // Haptic generator
+    let hapticGenerator = UIImpactFeedbackGenerator(style: .medium)
+    
     override func didMove(to view: SKView) {
         // Mengatur latar belakang menjadi warna putih
         backgroundColor = SKColor.white
@@ -45,12 +48,12 @@ class Scene4_Envy: SKScene {
         background_after?.isHidden = true
         
         // Setelah 1 detik, tunjukkan scene4_envy2
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.scene4_envy2?.isHidden = false
         }
         
         // Setelah 0.8 detik lagi, scroll ke background_before
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             if let backgroundBefore = self.background_before {
                 let moveAction = SKAction.move(to: backgroundBefore.position, duration: 1.5)
                 self.cameraNode?.run(moveAction)
@@ -93,17 +96,29 @@ class Scene4_Envy: SKScene {
             Lita?.position.x -= (deltaX / 2 + 1)
             
             // Geser Loti ke kanan secara otomatis
-            Loti?.position.x += (deltaX / 2 + 5)
+            Loti?.position.x += (deltaX / 2 + 10)
             
+            // Berikan umpan balik haptik saat tombol digeser
+            hapticGenerator.impactOccurred()
+            
+            // Periksa apakah button sudah mencapai posisi maksimal di sisi kanan layar
+            if newPositionX >= maxRightPosition {
+                // Panggil Scene5_Fighting setelah jeda 0.5 detik
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    if let scene5 = Scene5_Fighting(fileNamed: "Scene5_Fighting") {
+                        // Setup scene yang baru
+                        scene5.scaleMode = .aspectFill
+                        // Transisi ke scene baru
+                        self.view?.presentScene(scene5, transition: SKTransition.push(with: .up, duration: 2.0))
+                    }
+                }
+            }
         }
         
         // Update posisi awal sentuhan
         self.initialTouchPosition = touchLocation
     }
-
-
-
-
+    
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         // Reset posisi awal sentuhan

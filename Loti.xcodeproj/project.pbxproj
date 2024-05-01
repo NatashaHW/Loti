@@ -12,6 +12,8 @@
 		401E15362BDE1E75007E117A /* Scene3_Diskusi.sks in Resources */ = {isa = PBXBuildFile; fileRef = 401E15352BDE1E75007E117A /* Scene3_Diskusi.sks */; };
 		401E15382BDE2AA6007E117A /* Scene3_Diskusi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401E15372BDE2AA6007E117A /* Scene3_Diskusi.swift */; };
 		4088B9492BE0E87F0072CBF0 /* Scene6_Sadness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088B9482BE0E87F0072CBF0 /* Scene6_Sadness.swift */; };
+		4088B94D2BE1DD450072CBF0 /* Scene5_Fighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088B94C2BE1DD450072CBF0 /* Scene5_Fighting.swift */; };
+		4088B94F2BE23AA40072CBF0 /* PlayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088B94E2BE23AA30072CBF0 /* PlayScreen.swift */; };
 		40B8178C2BDF926700FF63AE /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B8178B2BDF926700FF63AE /* Haptics.swift */; };
 		40C606812BDA16CF00826842 /* Scene2_Halte.sks in Resources */ = {isa = PBXBuildFile; fileRef = 40C606802BDA16CF00826842 /* Scene2_Halte.sks */; };
 		40CE6FBC2BD9F09C005DA0BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE6FBB2BD9F09C005DA0BB /* AppDelegate.swift */; };
@@ -30,7 +32,7 @@
 		F4D0A1B52BDF5DEF00E1D553 /* Scene6_Sadness.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4D0A1B42BDF5DEF00E1D553 /* Scene6_Sadness.sks */; };
 		F4D0A1B72BDF5F4F00E1D553 /* Scene5_Fighting.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4D0A1B62BDF5F4F00E1D553 /* Scene5_Fighting.sks */; };
 		F4D0A1B92BDF95BE00E1D553 /* Scene7_Hug.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4D0A1B82BDF95BE00E1D553 /* Scene7_Hug.sks */; };
-		F4F75AE52BDF9B4A00225E98 /* HomePlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4F75AE42BDF9B4A00225E98 /* HomePlay.sks */; };
+		F4F75AE52BDF9B4A00225E98 /* PlayScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4F75AE42BDF9B4A00225E98 /* PlayScreen.sks */; };
 		F4F75AE72BDF9C1300225E98 /* Replay.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4F75AE62BDF9C1300225E98 /* Replay.sks */; };
 		F4F75AEB2BDFA91600225E98 /* Scene4_Envy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F75AEA2BDFA91600225E98 /* Scene4_Envy.swift */; };
 /* End PBXBuildFile section */
@@ -58,6 +60,8 @@
 		401E15352BDE1E75007E117A /* Scene3_Diskusi.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene3_Diskusi.sks; sourceTree = "<group>"; };
 		401E15372BDE2AA6007E117A /* Scene3_Diskusi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene3_Diskusi.swift; sourceTree = "<group>"; };
 		4088B9482BE0E87F0072CBF0 /* Scene6_Sadness.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene6_Sadness.swift; sourceTree = "<group>"; };
+		4088B94C2BE1DD450072CBF0 /* Scene5_Fighting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene5_Fighting.swift; sourceTree = "<group>"; };
+		4088B94E2BE23AA30072CBF0 /* PlayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayScreen.swift; sourceTree = "<group>"; };
 		40B8178B2BDF926700FF63AE /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		40C606802BDA16CF00826842 /* Scene2_Halte.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene2_Halte.sks; sourceTree = "<group>"; };
 		40CE6FB82BD9F09C005DA0BB /* Loti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Loti.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,7 +83,7 @@
 		F4D0A1B42BDF5DEF00E1D553 /* Scene6_Sadness.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene6_Sadness.sks; sourceTree = "<group>"; };
 		F4D0A1B62BDF5F4F00E1D553 /* Scene5_Fighting.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene5_Fighting.sks; sourceTree = "<group>"; };
 		F4D0A1B82BDF95BE00E1D553 /* Scene7_Hug.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene7_Hug.sks; sourceTree = "<group>"; };
-		F4F75AE42BDF9B4A00225E98 /* HomePlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HomePlay.sks; sourceTree = "<group>"; };
+		F4F75AE42BDF9B4A00225E98 /* PlayScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayScreen.sks; sourceTree = "<group>"; };
 		F4F75AE62BDF9C1300225E98 /* Replay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Replay.sks; sourceTree = "<group>"; };
 		F4F75AEA2BDFA91600225E98 /* Scene4_Envy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene4_Envy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,14 +138,16 @@
 			children = (
 				40CE6FBB2BD9F09C005DA0BB /* AppDelegate.swift */,
 				BBBC81732BDFF05A00100068 /* TesScene3Diskusi.swift */,
+				4088B94E2BE23AA30072CBF0 /* PlayScreen.swift */,
 				400AF3F12BDB91F1002B604B /* Scene1_Loti.swift */,
 				400AF3ED2BDACDE4002B604B /* Scene2_Halte.swift */,
 				401E15372BDE2AA6007E117A /* Scene3_Diskusi.swift */,
 				F4F75AEA2BDFA91600225E98 /* Scene4_Envy.swift */,
+				4088B94C2BE1DD450072CBF0 /* Scene5_Fighting.swift */,
 				4088B9482BE0E87F0072CBF0 /* Scene6_Sadness.swift */,
 				BBDD5A802BE0FC320099D6D1 /* Scene 7_Hug.swift */,
 				40B8178B2BDF926700FF63AE /* Haptics.swift */,
-				F4F75AE42BDF9B4A00225E98 /* HomePlay.sks */,
+				F4F75AE42BDF9B4A00225E98 /* PlayScreen.sks */,
 				40CE6FBD2BD9F09C005DA0BB /* Scene1_Loti.sks */,
 				40C606802BDA16CF00826842 /* Scene2_Halte.sks */,
 				401E15352BDE1E75007E117A /* Scene3_Diskusi.sks */,
@@ -282,7 +288,7 @@
 			files = (
 				40CE6FC72BD9F09C005DA0BB /* Main.storyboard in Resources */,
 				F4D0A1B72BDF5F4F00E1D553 /* Scene5_Fighting.sks in Resources */,
-				F4F75AE52BDF9B4A00225E98 /* HomePlay.sks in Resources */,
+				F4F75AE52BDF9B4A00225E98 /* PlayScreen.sks in Resources */,
 				F4D0A1B32BDF536600E1D553 /* Scene4_Envy.sks in Resources */,
 				40CE6FBE2BD9F09C005DA0BB /* Scene1_Loti.sks in Resources */,
 				F4F75AE72BDF9C1300225E98 /* Replay.sks in Resources */,
@@ -317,7 +323,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBDD5A812BE0FC320099D6D1 /* Scene 7_Hug.swift in Sources */,
+				4088B94D2BE1DD450072CBF0 /* Scene5_Fighting.swift in Sources */,
+				4088B94F2BE23AA40072CBF0 /* PlayScreen.swift in Sources */,
 				F4F75AEB2BDFA91600225E98 /* Scene4_Envy.swift in Sources */,
 				400AF3F22BDB91F1002B604B /* Scene1_Loti.swift in Sources */,
 				401E15382BDE2AA6007E117A /* Scene3_Diskusi.swift in Sources */,
@@ -508,7 +515,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96AS525Q93;
+				DEVELOPMENT_TEAM = 6Y742356Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -536,7 +543,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 96AS525Q93;
+				DEVELOPMENT_TEAM = 6Y742356Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
