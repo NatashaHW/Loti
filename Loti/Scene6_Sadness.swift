@@ -33,11 +33,11 @@ class Scene6_Sadness: SKScene {
         cryAfter?.isHidden = true
         cryBefore?.isHidden = false
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.sadAfter?.isHidden = false
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
             if let cryBefore = self.cryBefore {
                 let moveAction = SKAction.move(to: cryBefore.position, duration: 1.5)
                 self.cameraNode?.run(moveAction)
@@ -94,10 +94,18 @@ class Scene6_Sadness: SKScene {
             if score == 10 {
                 canSpawnWater = false // Setel variabel untuk tidak lagi bisa spawn air
                 cryAfter?.isHidden = false
-                print("score sudah 10")
                 
                 // Menghentikan semua aksi yang diulang, termasuk spawnWater()
                 self.removeAllActions()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    if let scene7 = Scene7_Hug(fileNamed: "Scene7_Hug") {
+                        // Setup scene yang baru
+                        scene7.scaleMode = .aspectFill
+                        // Transisi ke scene baru
+                        self.view?.presentScene(scene7, transition: SKTransition.push(with: .up, duration: 2.0))
+                    }
+                }
             }
         }
     }

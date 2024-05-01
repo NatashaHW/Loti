@@ -55,26 +55,6 @@ class Scene7_Hug: SKScene {
         sceneEnding2.isHidden=false
         
         showHugAndMoveCamera()
-        
-        //        //masukkan mask
-        //        cropNode = SKCropNode()
-        //
-        //        sceneEnding2.position = CGPoint(x: sceneEnding1!.position.x, y: sceneEnding1!.position.y)
-        //
-        //        //buat shape lingkaran utk mask
-        //        let maskNode = SKShapeNode(circleOfRadius: 200)
-        //        maskNode.fillColor = .black
-        //        maskNode.position = CGPoint(x:sceneEnding1!.position.x, y:sceneEnding1!.position.y)
-        //
-        //        cropNode.maskNode = maskNode
-        //        cropNode.zPosition = 10
-        //
-        //        if heartLeftLocked == true && heartRightLocked == true {
-        //            addChild(cropNode)
-        //            cropNode.addChild(sceneEnding2)
-        //            print("puzzle state true")
-        //            animateMask()
-        //        }
     }
     
     func showHugAndMoveCamera() {
@@ -135,6 +115,15 @@ class Scene7_Hug: SKScene {
             cropNode.addChild(heartComplete)
             
             animateMask()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+                if let replay = ReplayScreen(fileNamed: "ReplayScreen") {
+                    // Setup scene yang baru
+                    replay.scaleMode = .aspectFill
+                    // Transisi ke scene baru
+                    self.view?.presentScene(replay, transition: SKTransition.push(with: .up, duration: 2.0))
+                }
+            }
         }
     }
     

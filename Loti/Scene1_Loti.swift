@@ -116,6 +116,14 @@ class Scene1_Loti: SKScene {
         
         hideChat?.isHidden = false
         
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            let newBubbleKosong = self.createNewBubbleKosong()
+            let newFriendBubbleOrange = self.createNewFriendBubbleOrange()
+            newFriendBubbleOrange.position = CGPoint(x: -233, y: -3700)
+            self.showBubbleAndFriendsBubble(bubble: newBubbleKosong, friendBubbble: newFriendBubbleOrange)
+            self.giveLightHapticFeedback()
+        }
     }
     
     func animateMask() {
@@ -174,6 +182,12 @@ class Scene1_Loti: SKScene {
     }
     
     
+    func createNewBubbleKosong() -> SKSpriteNode {
+        let newBubbleKosong = SKSpriteNode(imageNamed: "Bubble Kosong")
+        newBubbleKosong.isHidden = true
+        return newBubbleKosong
+    }
+    
     func createNewBubbleOrange() -> SKSpriteNode {
         let newBubbleOrange = SKSpriteNode(imageNamed: "Bubble Oranye")
         newBubbleOrange.zPosition = 40
@@ -209,6 +223,7 @@ class Scene1_Loti: SKScene {
         newFriendBubbleOrange.zPosition = 40
         return newFriendBubbleOrange
     }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {

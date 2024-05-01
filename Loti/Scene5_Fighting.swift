@@ -35,6 +35,9 @@ class Scene5_Fighting: SKScene {
     let maxLeftPosition: CGFloat = 20
     let maxRightPosition: CGFloat = UIScreen.main.bounds.width - 20 // Menggunakan lebar layar
     
+    // Haptic generator
+    let hapticGenerator = UIImpactFeedbackGenerator(style: .rigid)
+    
     override func didMove(to view: SKView) {
         // Mengatur latar belakang menjadi warna putih
         backgroundColor = SKColor.white
@@ -177,12 +180,23 @@ class Scene5_Fighting: SKScene {
                 lilo3?.isHidden = false
                 
                 self.removeAllActions()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    if let scene6 = Scene6_Sadness(fileNamed: "Scene6_Sadness") {
+                        // Setup scene yang baru
+                        scene6.scaleMode = .aspectFill
+                        // Transisi ke scene baru
+                        self.view?.presentScene(scene6, transition: SKTransition.push(with: .up, duration: 2.0))
+                    }
+                }
             default:
                 break
             }
+            
+            // Berikan umpan balik haptik yang kuat setiap kali tombol ditekan
+            hapticGenerator.impactOccurred()
             
         }
         
     }
 }
-

@@ -118,10 +118,17 @@ class Scene2_Halte: SKScene {
         // Di dalam didMove(to:)
         if let sceneContainingBubbleRed1 = bubbleRed1?.scene {
             // Tambahkan gesture recognizer ke properti view dari scene tersebut
-            let gestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture))
-            gestureRecognizer.direction = .up
-            gestureRecognizer.numberOfTouchesRequired = 1
-            sceneContainingBubbleRed1.view?.addGestureRecognizer(gestureRecognizer)
+            // Tambahkan gesture recognizer untuk gesture swipe ke atas hanya jika lokasi sentuhan berada di bawah -1700 pada sumbu y
+            let upSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture))
+            upSwipeGestureRecognizer.direction = .up
+            upSwipeGestureRecognizer.numberOfTouchesRequired = 1
+            // Cek apakah lokasi sentuhan berada di bawah -1700 pada sumbu y
+            if let sceneView = sceneContainingBubbleRed1.view, let scene = bubbleRed1?.scene {
+                let locationInScene = sceneView.convert(CGPoint(x: 0, y: -1700), to: scene)
+                if locationInScene.y < 0 {
+                    sceneView.addGestureRecognizer(upSwipeGestureRecognizer)
+                }
+            }
         }
     }
     
@@ -153,7 +160,7 @@ class Scene2_Halte: SKScene {
                 }
                 // Provide impact haptic feedback
                 let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-                           heavyImpactFeedbackGenerator.impactOccurred()
+                heavyImpactFeedbackGenerator.impactOccurred()
             }
             
         case 2:
@@ -175,7 +182,7 @@ class Scene2_Halte: SKScene {
             }
             // Provide impact haptic feedback
             let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-                   heavyImpactFeedbackGenerator.impactOccurred()
+            heavyImpactFeedbackGenerator.impactOccurred()
             
         case 3:
             // Jika ini adalah swipe ketiga
@@ -196,7 +203,7 @@ class Scene2_Halte: SKScene {
             }
             
             let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-                   heavyImpactFeedbackGenerator.impactOccurred()
+            heavyImpactFeedbackGenerator.impactOccurred()
             
         case 4:
             // Jika ini adalah swipe ketiga
@@ -227,7 +234,7 @@ class Scene2_Halte: SKScene {
             }
             
             let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-                   heavyImpactFeedbackGenerator.impactOccurred()
+            heavyImpactFeedbackGenerator.impactOccurred()
             
         default:
             break
@@ -242,20 +249,20 @@ class Scene2_Halte: SKScene {
         let touchLocation = touch.location(in: self)
         
         // Cek apakah sentuhan terjadi di area scene2Clock atau scene2ClockHand
-                if let clock = scene2Clock, clock.contains(touchLocation) {
-                    // Memulai rotasi scene2ClockHand searah jarum jam
-                    rotateClockHandClockwise()
-                    tapCount += 1
-                    // Provide impact haptic feedback
-                    impactFeedbackGenerator.impactOccurred()
-                    
-                } else if let clockHand = scene2ClockHand, clockHand.contains(touchLocation) {
-                    // Memulai rotasi scene2ClockHand searah jarum jam
-                    rotateClockHandClockwise()
-                    tapCount += 1
-                    // Provide impact haptic feedback
-                    impactFeedbackGenerator.impactOccurred()
-                }
+        if let clock = scene2Clock, clock.contains(touchLocation) {
+            // Memulai rotasi scene2ClockHand searah jarum jam
+            rotateClockHandClockwise()
+            tapCount += 1
+            // Provide impact haptic feedback
+            impactFeedbackGenerator.impactOccurred()
+            
+        } else if let clockHand = scene2ClockHand, clockHand.contains(touchLocation) {
+            // Memulai rotasi scene2ClockHand searah jarum jam
+            rotateClockHandClockwise()
+            tapCount += 1
+            // Provide impact haptic feedback
+            impactFeedbackGenerator.impactOccurred()
+        }
         
         
         
