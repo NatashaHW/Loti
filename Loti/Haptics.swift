@@ -8,7 +8,7 @@ class HapticUtils {
     
     static func runHaptic(duration: TimeInterval) {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else {
-            print("Device does not support haptics")
+            //            print("Device does not support haptics")
             return
         }
         
@@ -39,6 +39,10 @@ class HapticUtils {
         }
     }
 
+    static func hapticHug() {
+        let shorterDuration: TimeInterval = 0.2 // Adjust the duration as needed
+        runHaptic(duration: shorterDuration)
+    }
     
     static func hapticIde() {
         let shorterDuration: TimeInterval = 0.5 // Adjust the duration as needed

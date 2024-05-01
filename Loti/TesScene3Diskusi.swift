@@ -22,7 +22,7 @@ struct TesScene3Diskusi: View {
 struct SKViewRepresentable: UIViewRepresentable {
     func makeUIView(context: Context) -> SKView {
         let skView = SKView()
-        if let scene = SKScene(fileNamed: "Scene3_Diskusi") {
+        if let scene = SKScene(fileNamed: "Scene7_Hug") {
             scene.scaleMode = .aspectFill
             scene.backgroundColor = .clear
             skView.presentScene(scene)
