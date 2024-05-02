@@ -21,6 +21,8 @@ class Scene2_Halte: SKScene {
     
     var radarJam: SKSpriteNode?
     
+    var clockTicking: SKAudioNode!
+    
     var bubbleRed1Tap: SKSpriteNode?
     var bubbleRed2Tap: SKSpriteNode?
     var bubbleRed3Tap: SKSpriteNode?
@@ -33,6 +35,10 @@ class Scene2_Halte: SKScene {
     
     var tapCount = 0
     var swipeCount = 0
+    
+    var arrowUp: SKSpriteNode?
+    
+    var halteSound: SKAudioNode!
     
     // Create a feedback generator instance for selection feedback
     let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
@@ -70,6 +76,7 @@ class Scene2_Halte: SKScene {
         bubbleRed4Tap = childNode(withName: "//bubbleRed4Tap") as? SKSpriteNode
         
         radarJam = childNode(withName: "//radarJam") as? SKSpriteNode
+        arrowUp = childNode(withName: "//arrowUp") as? SKSpriteNode
         
         busBSD = childNode(withName: "busBSD") as? SKSpriteNode
         
@@ -92,6 +99,11 @@ class Scene2_Halte: SKScene {
         bubbleRed3Tap?.isHidden = true
         bubbleRed4Tap?.isHidden = true
         radarJam?.isHidden = true
+        arrowUp?.isHidden = true
+        
+        self.clockTicking = self.playBackgroundMusic(musicName: "Clock Tick Edit")
+        
+        halteSound = playBackgroundMusic(musicName: "AnxiousHalte")
         
         // Mulai animasi setelah beberapa detik
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -113,133 +125,19 @@ class Scene2_Halte: SKScene {
             self.scene2Clock?.isHidden = false
             self.scene2BgClock?.isHidden = false
             self.scene2Hand?.isHidden = false
+            self.arrowUp?.isHidden = false
+            self.animateUpAndDown(object: self.arrowUp!)
         }
         
-        // Di dalam didMove(to:)
-        if let sceneContainingBubbleRed1 = bubbleRed1?.scene {
-            // Tambahkan gesture recognizer ke properti view dari scene tersebut
-            // Tambahkan gesture recognizer untuk gesture swipe ke atas hanya jika lokasi sentuhan berada di bawah -1700 pada sumbu y
-            let upSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture))
-            upSwipeGestureRecognizer.direction = .up
-            upSwipeGestureRecognizer.numberOfTouchesRequired = 1
-            // Cek apakah lokasi sentuhan berada di bawah -1700 pada sumbu y
-            if let sceneView = sceneContainingBubbleRed1.view, let scene = bubbleRed1?.scene {
-                let locationInScene = sceneView.convert(CGPoint(x: 0, y: -1700), to: scene)
-                if locationInScene.y < 0 {
-                    sceneView.addGestureRecognizer(upSwipeGestureRecognizer)
-                }
-            }
-        }
     }
     
-    
-    @objc func swipeGesture (_ recognizer: UISwipeGestureRecognizer) {
-        swipeCount += 1
-        
-        switch swipeCount {
-        case 1:
-            // Tentukan posisi baru untuk bubbleRed1 setelah pergeseran
-            let newPosition = CGPoint(x: -12, y: -1959.5)
-            
-            // Buat action untuk pergeseran ke atas
-            let slideUpAction = SKAction.move(to: newPosition, duration: 0.5)
-            
-            bubbleRed1?.zPosition = 20
-            // Jalankan action pada bubbleRed1
-            bubbleRed1?.run(slideUpAction) {
-                // Setelah pergeseran selesai, tunggu 0.1 detik
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    // Tampilkan bubbleBlue1 setelah menunggu
-                    self.bubbleBlue1?.isHidden = false
-                }
-                
-                // Tunggu 0.2 detik lebih lama
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    // Tampilkan bubbleRed2 setelah menunggu
-                    self.bubbleRed2?.isHidden = false
-                }
-                // Provide impact haptic feedback
-                let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-                heavyImpactFeedbackGenerator.impactOccurred()
-            }
-            
-        case 2:
-            // Jika ini adalah swipe kedua
-            // Tentukan posisi baru untuk bubbleRed2 setelah pergeseran kedua
-            let newPosition = CGPoint(x: 222.537, y: -2301.2)
-            
-            // Buat action untuk pergeseran ke atas
-            let slideUpAction = SKAction.move(to: newPosition, duration: 0.5)
-            
-            bubbleRed2?.zPosition = 19
-            // Jalankan action pada bubbleRed2
-            bubbleRed2?.run(slideUpAction)
-            
-            // Tunggu 0.2 detik lebih lama
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                // Tampilkan bubbleRed2 setelah menunggu
-                self.bubbleRed3?.isHidden = false
-            }
-            // Provide impact haptic feedback
-            let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-            heavyImpactFeedbackGenerator.impactOccurred()
-            
-        case 3:
-            // Jika ini adalah swipe ketiga
-            // Tentukan posisi baru untuk bubbleRed3 setelah pergeseran ketiga
-            let newPosition = CGPoint(x: 193.187, y: -1832.604)
-            
-            // Buat action untuk pergeseran ke atas
-            let slideUpAction = SKAction.move(to: newPosition, duration: 0.5)
-            
-            bubbleRed3?.zPosition = 20
-            // Jalankan action pada bubbleRed3
-            bubbleRed3?.run(slideUpAction)
-            
-            // Tunggu 0.2 detik lebih lama
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                // Tampilkan bubbleRed3 setelah menunggu
-                self.bubbleRed4?.isHidden = false
-            }
-            
-            let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-            heavyImpactFeedbackGenerator.impactOccurred()
-            
-        case 4:
-            // Jika ini adalah swipe ketiga
-            // Tentukan posisi baru untuk bubbleRed3 setelah pergeseran ketiga
-            let newPosition = CGPoint(x: 235.5, y: -2054.918)
-            
-            // Buat action untuk pergeseran ke atas
-            let slideUpAction = SKAction.move(to: newPosition, duration: 0.5)
-            
-            bubbleRed4?.zPosition = 21
-            bubbleRed4?.run(slideUpAction)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                // Unhide dengan transition slide dari kanan ke kiri
-                /*let slideDistance = self.size.width*/ // Jarak pergeseran
-                let slideTo = CGPoint(x: 3.367, y: -2906.954)
-                let slideRightAction = SKAction.move(to: slideTo, duration: 2.5)
-                // Terapkan timing mode ease in pada slideRightAction
-                slideRightAction.timingMode = .easeIn
-                
-                self.busBSD?.run(slideRightAction) {
-                    // Navigasi ke Scene3_Diskusi setelah animasi selesai
-                    if let scene3Diskusi = Scene3_Diskusi(fileNamed: "Scene3_Diskusi") {
-                        scene3Diskusi.scaleMode = .aspectFill
-                        self.view?.presentScene(scene3Diskusi)
-                    }
-                }
-            }
-            
-            let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-            heavyImpactFeedbackGenerator.impactOccurred()
-            
-        default:
-            break
-        }
-        
+    func setupSwipeGestureRecognizer() {
+        // Add the swipe gesture recognizer to the view
+        print ("swipe gesture setup")
+        let upSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture(_:)))
+        upSwipeGestureRecognizer.direction = .up
+        upSwipeGestureRecognizer.numberOfTouchesRequired = 1
+        view?.addGestureRecognizer(upSwipeGestureRecognizer)
     }
     
     // Override touchesBegan method to handle touch events
@@ -248,6 +146,11 @@ class Scene2_Halte: SKScene {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
         
+        //set up touch gesture
+        if tapCount == 10 {
+            setupSwipeGestureRecognizer()
+        }
+        
         // Cek apakah sentuhan terjadi di area scene2Clock atau scene2ClockHand
         if let clock = scene2Clock, clock.contains(touchLocation) {
             // Memulai rotasi scene2ClockHand searah jarum jam
@@ -255,6 +158,8 @@ class Scene2_Halte: SKScene {
             tapCount += 1
             // Provide impact haptic feedback
             impactFeedbackGenerator.impactOccurred()
+            print ("\(tapCount)")
+            
             
         } else if let clockHand = scene2ClockHand, clockHand.contains(touchLocation) {
             // Memulai rotasi scene2ClockHand searah jarum jam
@@ -262,9 +167,9 @@ class Scene2_Halte: SKScene {
             tapCount += 1
             // Provide impact haptic feedback
             impactFeedbackGenerator.impactOccurred()
+            print ("\(tapCount)")
+            
         }
-        
-        
         
         
         func rotateClockHandClockwise() {
@@ -287,6 +192,7 @@ class Scene2_Halte: SKScene {
                         self.bubbleRed1?.isHidden = false
                         self.bubbleRed1?.position = CGPoint(x: -12, y: -3540)
                         self.bubbleRed1?.zPosition = 35
+
                         
                         self.bubbleRed2?.position = CGPoint(x: 2, y: -3540)
                         self.bubbleRed2?.zPosition = 36
@@ -296,7 +202,8 @@ class Scene2_Halte: SKScene {
                         
                         self.bubbleRed4?.position = CGPoint(x: 25.037, y: -3540)
                         self.bubbleRed4?.zPosition = 38
-                        
+
+                        self.clockTicking.run(SKAction.stop())
                     }
                 }
             }])
@@ -313,5 +220,185 @@ class Scene2_Halte: SKScene {
         
         
         
+    }
+    
+    @objc func swipeGesture (_ recognizer: UISwipeGestureRecognizer) {
+        if recognizer.state == .ended {
+            print("Swipe detected")
+            swipeCount += 1
+            print("Swipe count: \(swipeCount)")
+        
+            let swipeLocation = recognizer.location(in: view)
+            print ("\(swipeLocation)")
+            
+            switch swipeCount {
+            case 1:
+                // Tentukan posisi baru untuk bubbleRed1 setelah pergeseran
+                let newPosition = CGPoint(x: -12, y: -1959.5)
+                
+                // Buat action untuk pergeseran ke atas
+                let slideUpAction = SKAction.move(to: newPosition, duration: 0.5)
+                
+                bubbleRed1?.zPosition = 20
+                arrowUp?.isHidden = true
+                // Jalankan action pada bubbleRed1
+                bubbleRed1?.run(slideUpAction) {
+                    // Setelah pergeseran selesai, tunggu 0.1 detik
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        // Tampilkan bubbleBlue1 setelah menunggu
+                        self.bubbleBlue1?.isHidden = false
+                    }
+                    
+                    // Tunggu 0.2 detik lebih lama
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        // Tampilkan bubbleRed2 setelah menunggu
+                        self.bubbleRed2?.isHidden = false
+                    }
+                    // Provide impact haptic feedback
+                    let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                    heavyImpactFeedbackGenerator.impactOccurred()
+                }
+                
+            case 2:
+                // Jika ini adalah swipe kedua
+                // Tentukan posisi baru untuk bubbleRed2 setelah pergeseran kedua
+                let newPosition = CGPoint(x: 222.537, y: -2301.2)
+                
+                // Buat action untuk pergeseran ke atas
+                let slideUpAction = SKAction.move(to: newPosition, duration: 0.5)
+                
+                bubbleRed2?.zPosition = 19
+                // Jalankan action pada bubbleRed2
+                bubbleRed2?.run(slideUpAction)
+                
+                // Tunggu 0.2 detik lebih lama
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    // Tampilkan bubbleRed2 setelah menunggu
+                    self.bubbleRed3?.isHidden = false
+                }
+                // Provide impact haptic feedback
+                let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                heavyImpactFeedbackGenerator.impactOccurred()
+                
+            case 3:
+                // Jika ini adalah swipe ketiga
+                // Tentukan posisi baru untuk bubbleRed3 setelah pergeseran ketiga
+                let newPosition = CGPoint(x: 193.187, y: -1832.604)
+                
+                // Buat action untuk pergeseran ke atas
+                let slideUpAction = SKAction.move(to: newPosition, duration: 0.5)
+                
+                bubbleRed3?.zPosition = 20
+                // Jalankan action pada bubbleRed3
+                bubbleRed3?.run(slideUpAction)
+                
+                // Tunggu 0.2 detik lebih lama
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    // Tampilkan bubbleRed3 setelah menunggu
+                    self.bubbleRed4?.isHidden = false
+                }
+                
+                let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                heavyImpactFeedbackGenerator.impactOccurred()
+                
+            case 4:
+                // Jika ini adalah swipe keempat
+                // Tentukan posisi baru untuk bubbleRed3 setelah pergeseran ketiga
+                let newPosition = CGPoint(x: 235.5, y: -2054.918)
+                
+                // Buat action untuk pergeseran ke atas
+                let slideUpAction = SKAction.move(to: newPosition, duration: 0.5)
+                
+                bubbleRed4?.zPosition = 21
+                bubbleRed4?.run(slideUpAction)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    // Unhide dengan transition slide dari kanan ke kiri
+                    /*let slideDistance = self.size.width*/ // Jarak pergeseran
+                    let slideTo = CGPoint(x: 3.367, y: -2906.954)
+                    let slideRightAction = SKAction.move(to: slideTo, duration: 2.5)
+                    // Terapkan timing mode ease in pada slideRightAction
+                    slideRightAction.timingMode = .easeIn
+                    
+                    self.busBSD?.run(slideRightAction) {
+                        // Navigasi ke Scene3_Diskusi setelah animasi selesai
+                        self.halteSound.run(SKAction.stop())
+                        if let scene3Diskusi = Scene3_Diskusi(fileNamed: "Scene3_Diskusi") {
+                            scene3Diskusi.scaleMode = .aspectFill
+                            self.view?.presentScene(scene3Diskusi)
+                        }
+                    }
+                }
+                
+                let heavyImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+                heavyImpactFeedbackGenerator.impactOccurred()
+                
+            default:
+                break
+            }
+            
+        }
+        
+    }
+    
+    func animateUpAndDown(object: SKSpriteNode) {
+        // Pastikan object tidak sedang disembunyikan
+        guard !object.isHidden else { return }
+        
+        // Tentukan posisi tujuan baru saat naik dan saat turun
+        let upPosition = CGPoint(x: object.position.x, y: object.position.y + 20)
+        let downPosition = CGPoint(x: object.position.x, y: object.position.y)
+        
+        // Buat action untuk menggerakkan node ke posisi baru saat naik dan saat turun
+        let moveUpAction = SKAction.move(to: upPosition, duration: 0.5)
+        let moveDownAction = SKAction.move(to: downPosition, duration: 0.5)
+        
+        // Gabungkan kedua action dalam sebuah sequence
+        let upAndDownSequence = SKAction.sequence([moveUpAction, moveDownAction])
+        
+        // Buat action untuk mengulangi sequence tersebut
+        let repeatAction = SKAction.repeatForever(upAndDownSequence)
+        
+        // Jalankan action pada arrowUp
+        object.run(repeatAction)
+    }
+
+
+    
+    func playBackgroundMusic(musicName: String) -> SKAudioNode? {
+            // Mencari URL musik dengan menggunakan nama file
+            guard let musicURL = Bundle.main.url(forResource: musicName, withExtension: "mp3") else {
+                print("Background music file not found.")
+                return nil
+            }
+            
+            // Membuat audio node dari URL dan mengembalikannya
+            let music = SKAudioNode(url: musicURL)
+            addChild(music)
+            return music
+        }
+    
+    func stopBackgroundMusicWithFadeOut(music: SKAudioNode?) {
+        guard let music = music else { return }
+        
+        let fadeOutDuration: TimeInterval = 40.0 // Durasi fade-out
+        let fadeSteps: Int = 100 // Jumlah langkah dalam fade-out
+        let initialVolume: Float = 0.5 // Volume awal
+
+        // Menghitung penurunan volume pada setiap langkah
+        let volumeStep = initialVolume / Float(fadeSteps)
+
+        // Membuat serangkaian aksi untuk mengurangi volume secara perlahan
+        var fadeOutActions: [SKAction] = []
+        for step in 1...fadeSteps {
+            let volume = initialVolume - Float(step) * volumeStep
+            let changeVolumeAction = SKAction.changeVolume(to: volume, duration: fadeOutDuration / Double(fadeSteps))
+            fadeOutActions.append(changeVolumeAction)
+        }
+
+        // Menjalankan efek fade-out pada audio node
+        music.run(SKAction.sequence(fadeOutActions)) {
+            music.run(SKAction.stop())
+        }
     }
 }

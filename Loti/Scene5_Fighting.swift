@@ -24,6 +24,8 @@ class Scene5_Fighting: SKScene {
     
     var score: Int = 0
     
+//    var sceneTengkar: SKAudioNode!
+    
     var canSpawnButton: Bool = true
     
     var cameraNode: SKCameraNode?
@@ -36,7 +38,7 @@ class Scene5_Fighting: SKScene {
     let maxRightPosition: CGFloat = UIScreen.main.bounds.width - 20 // Menggunakan lebar layar
     
     // Haptic generator
-    let hapticGenerator = UIImpactFeedbackGenerator(style: .rigid)
+//    let hapticGenerator = UIImpactFeedbackGenerator(style: .rigid)
     
     override func didMove(to view: SKView) {
         // Mengatur latar belakang menjadi warna putih
@@ -88,11 +90,13 @@ class Scene5_Fighting: SKScene {
         bubbleRed5?.isHidden = true
         bubbleRed6?.isHidden = true
         
+//        sceneTengkar = playBackgroundMusic(musicName: "SceneTengkar")
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.handAfter?.isHidden = false
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
             if let bgFight1 = self.bgFight1 {
                 let moveAction = SKAction.move(to: bgFight1.position, duration: 1.5)
                 self.cameraNode?.run(moveAction)
@@ -173,6 +177,7 @@ class Scene5_Fighting: SKScene {
                 self.bubbleRed4?.isHidden = false
             case 5:
                 self.bubbleRed5?.isHidden = false
+//                stopBackgroundMusicWithFadeOut(music: sceneTengkar)
             case 6:
                 self.bubbleRed6?.isHidden = false
                 canSpawnButton = false
@@ -181,7 +186,12 @@ class Scene5_Fighting: SKScene {
                 
                 self.removeAllActions()
                 
+//                self.sceneTengkar.run(SKAction.stop())
+                
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                    self.stopBackgroundMusicWithFadeOut(music: self.sceneTengkar)
+                    
                     if let scene6 = Scene6_Sadness(fileNamed: "Scene6_Sadness") {
                         // Setup scene yang baru
                         scene6.scaleMode = .aspectFill
@@ -194,9 +204,46 @@ class Scene5_Fighting: SKScene {
             }
             
             // Berikan umpan balik haptik yang kuat setiap kali tombol ditekan
-            hapticGenerator.impactOccurred()
+            HapticUtils.hapticHug()
             
         }
         
     }
+    
+    func playBackgroundMusic(musicName: String) -> SKAudioNode? {
+            // Mencari URL musik dengan menggunakan nama file
+            guard let musicURL = Bundle.main.url(forResource: musicName, withExtension: "mp3") else {
+                print("Background music file not found.")
+                return nil
+            }
+            
+            // Membuat audio node dari URL dan mengembalikannya
+            let music = SKAudioNode(url: musicURL)
+            addChild(music)
+            return music
+        }
+
+        func stopBackgroundMusicWithFadeOut(music: SKAudioNode?) {
+            guard let music = music else { return }
+            
+            let fadeOutDuration: TimeInterval = 40.0 // Durasi fade-out
+            let fadeSteps: Int = 100 // Jumlah langkah dalam fade-out
+            let initialVolume: Float = 0.5 // Volume awal
+
+            // Menghitung penurunan volume pada setiap langkah
+            let volumeStep = initialVolume / Float(fadeSteps)
+
+            // Membuat serangkaian aksi untuk mengurangi volume secara perlahan
+            var fadeOutActions: [SKAction] = []
+            for step in 1...fadeSteps {
+                let volume = initialVolume - Float(step) * volumeStep
+                let changeVolumeAction = SKAction.changeVolume(to: volume, duration: fadeOutDuration / Double(fadeSteps))
+                fadeOutActions.append(changeVolumeAction)
+            }
+
+            // Menjalankan efek fade-out pada audio node
+            music.run(SKAction.sequence(fadeOutActions)) {
+                music.run(SKAction.stop())
+            }
+        }
 }

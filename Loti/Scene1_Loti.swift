@@ -2,7 +2,6 @@ import SpriteKit
 import GameplayKit
 import CoreHaptics
 
-
 class Scene1_Loti: SKScene {
     
     var sembunyikan: SKSpriteNode?
@@ -38,6 +37,8 @@ class Scene1_Loti: SKScene {
     
     var cameraNode: SKCameraNode?
     
+    var notification: SKAudioNode!
+    
     var bubbleYPosition: CGFloat = -3800
     var friendBubbleYPosition: CGFloat = -3600
     
@@ -48,6 +49,9 @@ class Scene1_Loti: SKScene {
     var emotionSelected = false
     
     var cropNode: SKCropNode!
+    
+    var morningSound: SKAudioNode!
+    var alarmSound: SKAudioNode!
     
     override func didMove(to view: SKView) {
         // Mengatur latar belakang menjadi warna putih
@@ -87,10 +91,6 @@ class Scene1_Loti: SKScene {
         sembunyikan?.isHidden = false
         sembunyikan?.zPosition = 50
         
-        //        scene1ChatOrange?.zPosition = 35
-        //        scene1ChatYellow?.zPosition = 35
-        //        scene1ChatBlue?.zPosition = 35
-        
         //alarm
         vibrateAlarm()
         
@@ -117,13 +117,16 @@ class Scene1_Loti: SKScene {
         hideChat?.isHidden = false
         
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            let newBubbleKosong = self.createNewBubbleKosong()
-            let newFriendBubbleOrange = self.createNewFriendBubbleOrange()
-            newFriendBubbleOrange.position = CGPoint(x: -233, y: -3700)
-            self.showBubbleAndFriendsBubble(bubble: newBubbleKosong, friendBubbble: newFriendBubbleOrange)
-            self.giveLightHapticFeedback()
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+//            let newBubbleKosong = self.createNewBubbleKosong()
+//            let newFriendBubbleOrange = self.createNewFriendBubbleOrange()
+//            newFriendBubbleOrange.position = CGPoint(x: -233, y: -3700)
+//            self.showBubbleAndFriendsBubble(bubble: newBubbleKosong, friendBubbble: newFriendBubbleOrange)
+//            self.giveLightHapticFeedback()
+////            self.notification = self.playBackgroundMusic(musicName: "Notification")
+//            let notif = SKAction.playSoundFileNamed("Notification", waitForCompletion: false)
+//            self.run(notif)
+//        }
     }
     
     func animateMask() {
@@ -166,6 +169,8 @@ class Scene1_Loti: SKScene {
         
         // Run animation on the alarm asset
         alarm.run(repeatAction){}
+        
+        alarmSound = playBackgroundMusic(musicName: "Alarm edit")
     }
     
     func stopVibration() {
@@ -179,6 +184,7 @@ class Scene1_Loti: SKScene {
         animateMask()
         
         HapticUtils.stopHaptic()
+        alarmSound.run(SKAction.stop())
     }
     
     
@@ -247,6 +253,10 @@ class Scene1_Loti: SKScene {
                     
                     // Memberi feedback haptic ringan
                     giveLightHapticFeedback()
+//                    notification = playBackgroundMusic(musicName: "Notification")
+                    let notif = SKAction.playSoundFileNamed("Notification", waitForCompletion: false)
+                    run(notif)
+                    
                 } else if node == emotionYellow {
                     tapCountYellow += 1
                     print("tap count yellow", tapCountYellow)
@@ -263,6 +273,9 @@ class Scene1_Loti: SKScene {
                     
                     // Memberi feedback haptic ringan
                     giveLightHapticFeedback()
+//                    notification = playBackgroundMusic(musicName: "Notification")
+                    let notif = SKAction.playSoundFileNamed("Notification", waitForCompletion: false)
+                    run(notif)
                 } else if node == emotionBlue  {
                     tapCountBlue += 1
                     print("tap count blue", tapCountBlue)
@@ -279,10 +292,16 @@ class Scene1_Loti: SKScene {
                     
                     // Memberi feedback haptic ringan
                     giveLightHapticFeedback()
+//                    notification = playBackgroundMusic(musicName: "Notification")
+                    let notif = SKAction.playSoundFileNamed("Notification", waitForCompletion: false)
+                    run(notif)
                 }
                 
                 // Periksa jika jumlah tap telah mencapai 3
                 if tapCountOrange + tapCountYellow + tapCountBlue == 3 {
+                    
+                    stopBackgroundMusicWithFadeOut(music: morningSound)
+                    
                     // Panggil Scene2_Halte setelah 1 detik
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         // Panggil Scene2_Halte
@@ -308,6 +327,9 @@ class Scene1_Loti: SKScene {
     
     func stopVibrationAndMoveCamera() {
         stopVibration()
+        
+        morningSound = playBackgroundMusic(musicName: "backgroundMusic")
+        
         let waitToShowScene1Yawn1 = SKAction.wait(forDuration: 2.0)
         // Menggerakkan kamera ke scene1Yawn1
         let moveCameraToYawn1Action = SKAction.move(to: scene1Yawn1!.position, duration: 1.0)
@@ -326,7 +348,19 @@ class Scene1_Loti: SKScene {
         let sequenceMoveCameraToChat = SKAction.sequence([waitBeforeMoveCameraToChat, moveCameraToChatAction])
         
         // Menjalankan urutan aksi
-        cameraNode?.run(SKAction.sequence([sequenceToShowScene1Yawn1, sequenceToShowScene1Yawn2, sequenceMoveCameraToChat]))
+        cameraNode?.run(SKAction.sequence([sequenceToShowScene1Yawn1, sequenceToShowScene1Yawn2, sequenceMoveCameraToChat])) {
+        
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                let newBubbleKosong = self.createNewBubbleKosong()
+                let newFriendBubbleOrange = self.createNewFriendBubbleOrange()
+                newFriendBubbleOrange.position = CGPoint(x: -233, y: -3700)
+                self.showBubbleAndFriendsBubble(bubble: newBubbleKosong, friendBubbble: newFriendBubbleOrange)
+                self.giveLightHapticFeedback()
+                //            self.notification = self.playBackgroundMusic(musicName: "Notification")
+                let notif = SKAction.playSoundFileNamed("Notification", waitForCompletion: false)
+                self.run(notif)
+            }
+        }
     }
     
     func showBubbleAndFriendsBubble(bubble: SKSpriteNode?, friendBubbble: SKSpriteNode?) {
@@ -394,4 +428,40 @@ class Scene1_Loti: SKScene {
     }
     
     
+    func playBackgroundMusic(musicName: String) -> SKAudioNode? {
+        // Mencari URL musik dengan menggunakan nama file
+        guard let musicURL = Bundle.main.url(forResource: musicName, withExtension: "mp3") else {
+            print("Background music file not found.")
+            return nil
+        }
+        
+        // Membuat audio node dari URL dan mengembalikannya
+        let music = SKAudioNode(url: musicURL)
+        addChild(music)
+        return music
+    }
+
+    func stopBackgroundMusicWithFadeOut(music: SKAudioNode?) {
+        guard let music = music else { return }
+        
+        let fadeOutDuration: TimeInterval = 40.0 // Durasi fade-out
+        let fadeSteps: Int = 100 // Jumlah langkah dalam fade-out
+        let initialVolume: Float = 0.5 // Volume awal
+
+        // Menghitung penurunan volume pada setiap langkah
+        let volumeStep = initialVolume / Float(fadeSteps)
+
+        // Membuat serangkaian aksi untuk mengurangi volume secara perlahan
+        var fadeOutActions: [SKAction] = []
+        for step in 1...fadeSteps {
+            let volume = initialVolume - Float(step) * volumeStep
+            let changeVolumeAction = SKAction.changeVolume(to: volume, duration: fadeOutDuration / Double(fadeSteps))
+            fadeOutActions.append(changeVolumeAction)
+        }
+
+        // Menjalankan efek fade-out pada audio node
+        music.run(SKAction.sequence(fadeOutActions)) {
+            music.run(SKAction.stop())
+        }
+    }
 }

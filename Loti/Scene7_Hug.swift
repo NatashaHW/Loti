@@ -31,6 +31,9 @@ class Scene7_Hug: SKScene {
     var cropNode: SKCropNode!
     var cameraNode: SKCameraNode?
     
+    var correct: SKAudioNode!
+    
+    var happy: SKAudioNode!
     
     override func didMove(to view: SKView) {
         backgroundColor = SKColor.white
@@ -47,6 +50,8 @@ class Scene7_Hug: SKScene {
         cameraNode = SKCameraNode()
         self.camera = cameraNode
         addChild(cameraNode!)
+        
+        happy = playBackgroundMusic(musicName: "happy ending")
         
         //declare visibility aset
         hugBefore?.isHidden=false
@@ -114,9 +119,13 @@ class Scene7_Hug: SKScene {
             // Add heartComplete to crop node after setting up the mask
             cropNode.addChild(heartComplete)
             
+            correct = playBackgroundMusic(musicName: "Correct Edit")
+            
             animateMask()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+                self.stopBackgroundMusicWithFadeOut(music: self.happy)
+                
                 if let replay = ReplayScreen(fileNamed: "ReplayScreen") {
                     // Setup scene yang baru
                     replay.scaleMode = .aspectFill
@@ -216,4 +225,43 @@ class Scene7_Hug: SKScene {
             
         }
     }
+    
+    func playBackgroundMusic(musicName: String) -> SKAudioNode? {
+            // Mencari URL musik dengan menggunakan nama file
+            guard let musicURL = Bundle.main.url(forResource: musicName, withExtension: "mp3") else {
+                print("Background music file not found.")
+                return nil
+            }
+            
+            // Membuat audio node dari URL dan mengembalikannya
+            let music = SKAudioNode(url: musicURL)
+            addChild(music)
+            return music
+        }
+
+        func stopBackgroundMusicWithFadeOut(music: SKAudioNode?) {
+            guard let music = music else { return }
+            
+            let fadeOutDuration: TimeInterval = 40.0 // Durasi fade-out
+            let fadeSteps: Int = 100 // Jumlah langkah dalam fade-out
+            let initialVolume: Float = 0.5 // Volume awal
+
+            // Menghitung penurunan volume pada setiap langkah
+            let volumeStep = initialVolume / Float(fadeSteps)
+
+            // Membuat serangkaian aksi untuk mengurangi volume secara perlahan
+            var fadeOutActions: [SKAction] = []
+            for step in 1...fadeSteps {
+                let volume = initialVolume - Float(step) * volumeStep
+                let changeVolumeAction = SKAction.changeVolume(to: volume, duration: fadeOutDuration / Double(fadeSteps))
+                fadeOutActions.append(changeVolumeAction)
+            }
+
+            // Menjalankan efek fade-out pada audio node
+            music.run(SKAction.sequence(fadeOutActions)) {
+                music.run(SKAction.stop())
+            }
+        }
+    
+    
 }

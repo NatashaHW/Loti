@@ -16,6 +16,26 @@
 		4088B94F2BE23AA40072CBF0 /* PlayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088B94E2BE23AA30072CBF0 /* PlayScreen.swift */; };
 		4088B9512BE243190072CBF0 /* Scene7_Hug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088B9502BE243190072CBF0 /* Scene7_Hug.swift */; };
 		4088B9532BE252100072CBF0 /* ReplayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4088B9522BE252100072CBF0 /* ReplayScreen.swift */; };
+		4088B95C2BE286BF0072CBF0 /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4088B9582BE286BF0072CBF0 /* backgroundMusic.mp3 */; };
+		4088B9612BE298DB0072CBF0 /* ClockTicking.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4088B95D2BE298DB0072CBF0 /* ClockTicking.mp3 */; };
+		4088B9622BE298DB0072CBF0 /* Scene1MorningSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4088B95E2BE298DB0072CBF0 /* Scene1MorningSound.mp3 */; };
+		4088B9632BE298DB0072CBF0 /* PopBubble.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4088B95F2BE298DB0072CBF0 /* PopBubble.mp3 */; };
+		4088B9642BE298DB0072CBF0 /* Alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4088B9602BE298DB0072CBF0 /* Alarm.mp3 */; };
+		4088B9672BE29F260072CBF0 /* Correct.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4088B9652BE29F260072CBF0 /* Correct.mp3 */; };
+		4088B9682BE29F260072CBF0 /* Wrong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4088B9662BE29F260072CBF0 /* Wrong.mp3 */; };
+		4088B96A2BE2BD380072CBF0 /* Notification.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4088B9692BE2BD380072CBF0 /* Notification.mp3 */; };
+		40A5637D2BE32DBF00E1464D /* AnxiousHalte.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40A5637C2BE32DBF00E1464D /* AnxiousHalte.mp3 */; };
+		40A563832BE33F7200E1464D /* SceneTengkar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40A563822BE33F7200E1464D /* SceneTengkar.mp3 */; };
+		40A563852BE33F7700E1464D /* SceneEnvy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40A563842BE33F7700E1464D /* SceneEnvy.mp3 */; };
+		40A563872BE3407600E1464D /* SadHappy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40A563862BE3407600E1464D /* SadHappy.mp3 */; };
+		40A563892BE3412700E1464D /* Clock Tick Edit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40A563882BE3412700E1464D /* Clock Tick Edit.mp3 */; };
+		40A5638B2BE3413300E1464D /* Alarm edit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40A5638A2BE3413300E1464D /* Alarm edit.mp3 */; };
+		40A5638D2BE3414500E1464D /* Wrong Edit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40A5638C2BE3414500E1464D /* Wrong Edit.mp3 */; };
+		40A5638F2BE3418900E1464D /* Correct Edit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40A5638E2BE3418900E1464D /* Correct Edit.mp3 */; };
+		40A563912BE3418E00E1464D /* Pop Edit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40A563902BE3418E00E1464D /* Pop Edit.mp3 */; };
+		40A563932BE343DE00E1464D /* Sad.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40A563922BE343DE00E1464D /* Sad.mp3 */; };
+		40A563952BE3440E00E1464D /* happy ending.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40A563942BE3440E00E1464D /* happy ending.mp3 */; };
+		40A563972BE3449600E1464D /* SceneTengkarEdit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40A563962BE3449600E1464D /* SceneTengkarEdit.mp3 */; };
 		40B8178C2BDF926700FF63AE /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B8178B2BDF926700FF63AE /* Haptics.swift */; };
 		40C606812BDA16CF00826842 /* Scene2_Halte.sks in Resources */ = {isa = PBXBuildFile; fileRef = 40C606802BDA16CF00826842 /* Scene2_Halte.sks */; };
 		40CE6FBC2BD9F09C005DA0BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE6FBB2BD9F09C005DA0BB /* AppDelegate.swift */; };
@@ -65,6 +85,26 @@
 		4088B94E2BE23AA30072CBF0 /* PlayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayScreen.swift; sourceTree = "<group>"; };
 		4088B9502BE243190072CBF0 /* Scene7_Hug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene7_Hug.swift; sourceTree = "<group>"; };
 		4088B9522BE252100072CBF0 /* ReplayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayScreen.swift; sourceTree = "<group>"; };
+		4088B9582BE286BF0072CBF0 /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
+		4088B95D2BE298DB0072CBF0 /* ClockTicking.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ClockTicking.mp3; sourceTree = "<group>"; };
+		4088B95E2BE298DB0072CBF0 /* Scene1MorningSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Scene1MorningSound.mp3; sourceTree = "<group>"; };
+		4088B95F2BE298DB0072CBF0 /* PopBubble.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = PopBubble.mp3; sourceTree = "<group>"; };
+		4088B9602BE298DB0072CBF0 /* Alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Alarm.mp3; sourceTree = "<group>"; };
+		4088B9652BE29F260072CBF0 /* Correct.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Correct.mp3; sourceTree = "<group>"; };
+		4088B9662BE29F260072CBF0 /* Wrong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Wrong.mp3; sourceTree = "<group>"; };
+		4088B9692BE2BD380072CBF0 /* Notification.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Notification.mp3; sourceTree = "<group>"; };
+		40A5637C2BE32DBF00E1464D /* AnxiousHalte.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = AnxiousHalte.mp3; sourceTree = "<group>"; };
+		40A563822BE33F7200E1464D /* SceneTengkar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SceneTengkar.mp3; sourceTree = "<group>"; };
+		40A563842BE33F7700E1464D /* SceneEnvy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SceneEnvy.mp3; sourceTree = "<group>"; };
+		40A563862BE3407600E1464D /* SadHappy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SadHappy.mp3; sourceTree = "<group>"; };
+		40A563882BE3412700E1464D /* Clock Tick Edit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Clock Tick Edit.mp3"; sourceTree = "<group>"; };
+		40A5638A2BE3413300E1464D /* Alarm edit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Alarm edit.mp3"; sourceTree = "<group>"; };
+		40A5638C2BE3414500E1464D /* Wrong Edit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Wrong Edit.mp3"; sourceTree = "<group>"; };
+		40A5638E2BE3418900E1464D /* Correct Edit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Correct Edit.mp3"; sourceTree = "<group>"; };
+		40A563902BE3418E00E1464D /* Pop Edit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pop Edit.mp3"; sourceTree = "<group>"; };
+		40A563922BE343DE00E1464D /* Sad.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sad.mp3; sourceTree = "<group>"; };
+		40A563942BE3440E00E1464D /* happy ending.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "happy ending.mp3"; sourceTree = "<group>"; };
+		40A563962BE3449600E1464D /* SceneTengkarEdit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SceneTengkarEdit.mp3; sourceTree = "<group>"; };
 		40B8178B2BDF926700FF63AE /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		40C606802BDA16CF00826842 /* Scene2_Halte.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Scene2_Halte.sks; sourceTree = "<group>"; };
 		40CE6FB82BD9F09C005DA0BB /* Loti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Loti.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +155,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4088B9542BE286BF0072CBF0 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				40A563962BE3449600E1464D /* SceneTengkarEdit.mp3 */,
+				40A563922BE343DE00E1464D /* Sad.mp3 */,
+				40A563942BE3440E00E1464D /* happy ending.mp3 */,
+				40A563902BE3418E00E1464D /* Pop Edit.mp3 */,
+				40A5638C2BE3414500E1464D /* Wrong Edit.mp3 */,
+				40A5638A2BE3413300E1464D /* Alarm edit.mp3 */,
+				40A5638E2BE3418900E1464D /* Correct Edit.mp3 */,
+				40A563882BE3412700E1464D /* Clock Tick Edit.mp3 */,
+				40A5637C2BE32DBF00E1464D /* AnxiousHalte.mp3 */,
+				40A563822BE33F7200E1464D /* SceneTengkar.mp3 */,
+				4088B9692BE2BD380072CBF0 /* Notification.mp3 */,
+				40A563862BE3407600E1464D /* SadHappy.mp3 */,
+				40A563842BE33F7700E1464D /* SceneEnvy.mp3 */,
+				4088B9662BE29F260072CBF0 /* Wrong.mp3 */,
+				4088B9652BE29F260072CBF0 /* Correct.mp3 */,
+				4088B95E2BE298DB0072CBF0 /* Scene1MorningSound.mp3 */,
+				4088B95D2BE298DB0072CBF0 /* ClockTicking.mp3 */,
+				4088B95F2BE298DB0072CBF0 /* PopBubble.mp3 */,
+				4088B9602BE298DB0072CBF0 /* Alarm.mp3 */,
+				4088B9582BE286BF0072CBF0 /* backgroundMusic.mp3 */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		40CE6FAF2BD9F09C005DA0BB = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +231,7 @@
 				40CE6FC52BD9F09C005DA0BB /* Main.storyboard */,
 				40CE6FC82BD9F09D005DA0BB /* Assets.xcassets */,
 				40CE6FCA2BD9F09D005DA0BB /* LaunchScreen.storyboard */,
+				4088B9542BE286BF0072CBF0 /* Sound */,
 			);
 			path = Loti;
 			sourceTree = "<group>";
@@ -289,15 +357,35 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4088B9612BE298DB0072CBF0 /* ClockTicking.mp3 in Resources */,
+				4088B95C2BE286BF0072CBF0 /* backgroundMusic.mp3 in Resources */,
+				4088B9672BE29F260072CBF0 /* Correct.mp3 in Resources */,
+				40A563852BE33F7700E1464D /* SceneEnvy.mp3 in Resources */,
 				40CE6FC72BD9F09C005DA0BB /* Main.storyboard in Resources */,
+				40A563952BE3440E00E1464D /* happy ending.mp3 in Resources */,
 				F4D0A1B72BDF5F4F00E1D553 /* Scene5_Fighting.sks in Resources */,
 				F4F75AE52BDF9B4A00225E98 /* PlayScreen.sks in Resources */,
+				4088B9682BE29F260072CBF0 /* Wrong.mp3 in Resources */,
+				40A5638B2BE3413300E1464D /* Alarm edit.mp3 in Resources */,
+				4088B9642BE298DB0072CBF0 /* Alarm.mp3 in Resources */,
 				F4D0A1B32BDF536600E1D553 /* Scene4_Envy.sks in Resources */,
 				40CE6FBE2BD9F09C005DA0BB /* Scene1_Loti.sks in Resources */,
+				40A563932BE343DE00E1464D /* Sad.mp3 in Resources */,
+				40A5637D2BE32DBF00E1464D /* AnxiousHalte.mp3 in Resources */,
+				40A563912BE3418E00E1464D /* Pop Edit.mp3 in Resources */,
+				4088B9622BE298DB0072CBF0 /* Scene1MorningSound.mp3 in Resources */,
+				40A5638F2BE3418900E1464D /* Correct Edit.mp3 in Resources */,
 				F4F75AE72BDF9C1300225E98 /* ReplayScreen.sks in Resources */,
+				40A5638D2BE3414500E1464D /* Wrong Edit.mp3 in Resources */,
 				40CE6FC92BD9F09D005DA0BB /* Assets.xcassets in Resources */,
 				40C606812BDA16CF00826842 /* Scene2_Halte.sks in Resources */,
+				40A563892BE3412700E1464D /* Clock Tick Edit.mp3 in Resources */,
+				40A563832BE33F7200E1464D /* SceneTengkar.mp3 in Resources */,
 				F4D0A1B92BDF95BE00E1D553 /* Scene7_Hug.sks in Resources */,
+				40A563872BE3407600E1464D /* SadHappy.mp3 in Resources */,
+				40A563972BE3449600E1464D /* SceneTengkarEdit.mp3 in Resources */,
+				4088B96A2BE2BD380072CBF0 /* Notification.mp3 in Resources */,
+				4088B9632BE298DB0072CBF0 /* PopBubble.mp3 in Resources */,
 				F4D0A1B52BDF5DEF00E1D553 /* Scene6_Sadness.sks in Resources */,
 				401E15362BDE1E75007E117A /* Scene3_Diskusi.sks in Resources */,
 				40CE6FCC2BD9F09D005DA0BB /* LaunchScreen.storyboard in Resources */,

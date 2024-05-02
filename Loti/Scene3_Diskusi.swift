@@ -21,8 +21,9 @@ class Scene3_Diskusi: SKScene {
     
     var busBSD: SKSpriteNode?
     
+    var wrong: SKAudioNode!
+    
     var cameraNode: SKCameraNode?
-        //    fileprivate let scene3IdeLoti1 = UIImageView(image: UIImage(named: "IdeLoti1"))
     
     //cek node mana yg lagi di drag
     var isDraggingScene3IdeLoti1 = false
@@ -149,6 +150,9 @@ class Scene3_Diskusi: SKScene {
                         let actionLoti1 = SKAction.moveBy(x: -200, y: 0, duration: 0.7)
                         lotiSemiGreen?.run(actionLoti1)
                         litaSemiYellow?.run(actionLoti1)
+                        
+                        let wrong = SKAction.playSoundFileNamed("Wrong Edit", waitForCompletion: false)
+                        run(wrong)
 
                     } else if node == scene3IdeLoti2 {
                         HapticUtils.hapticIde()
@@ -171,10 +175,14 @@ class Scene3_Diskusi: SKScene {
                         lotiGreen?.run(actionLoti2)
                         litaYellow?.run(actionLoti2)
                         
+                        let wrong = SKAction.playSoundFileNamed("Wrong Edit", waitForCompletion: false)
+                        run(wrong)
+                        
                     } else if node == scene3IdeLoti3 {
                         HapticUtils.hapticIde()
                         node.position = originalPosition!
-                        
+                        let wrong = SKAction.playSoundFileNamed("Wrong Edit", waitForCompletion: false)
+                        run(wrong)
                         //Tunggu, 1.5 detik, kemudian panggil dan scroll ke Scene4_Envy
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

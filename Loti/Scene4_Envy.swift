@@ -13,6 +13,8 @@ class Scene4_Envy: SKScene {
     
     var cameraNode: SKCameraNode?
     
+    var sceneEnvy: SKAudioNode!
+    
     // Variabel untuk menyimpan posisi awal sentuhan pada button
     var initialTouchPosition: CGPoint?
     
@@ -47,13 +49,15 @@ class Scene4_Envy: SKScene {
         scene4_envy2?.isHidden = true
         background_after?.isHidden = true
         
+        sceneEnvy = playBackgroundMusic(musicName: "SceneEnvy")
+        
         // Setelah 1 detik, tunjukkan scene4_envy2
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.scene4_envy2?.isHidden = false
         }
         
         // Setelah 0.8 detik lagi, scroll ke background_before
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
             if let backgroundBefore = self.background_before {
                 let moveAction = SKAction.move(to: backgroundBefore.position, duration: 1.5)
                 self.cameraNode?.run(moveAction)
@@ -103,6 +107,8 @@ class Scene4_Envy: SKScene {
             
             // Periksa apakah button sudah mencapai posisi maksimal di sisi kanan layar
             if newPositionX >= maxRightPosition {
+                stopBackgroundMusicWithFadeOut(music: sceneEnvy)
+                
                 // Panggil Scene5_Fighting setelah jeda 0.5 detik
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     if let scene5 = Scene5_Fighting(fileNamed: "Scene5_Fighting") {
@@ -123,5 +129,42 @@ class Scene4_Envy: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         // Reset posisi awal sentuhan
         initialTouchPosition = nil
+    }
+    
+    func playBackgroundMusic(musicName: String) -> SKAudioNode? {
+        // Mencari URL musik dengan menggunakan nama file
+        guard let musicURL = Bundle.main.url(forResource: musicName, withExtension: "mp3") else {
+            print("Background music file not found.")
+            return nil
+        }
+        
+        // Membuat audio node dari URL dan mengembalikannya
+        let music = SKAudioNode(url: musicURL)
+        addChild(music)
+        return music
+    }
+
+    func stopBackgroundMusicWithFadeOut(music: SKAudioNode?) {
+        guard let music = music else { return }
+        
+        let fadeOutDuration: TimeInterval = 40.0 // Durasi fade-out
+        let fadeSteps: Int = 100 // Jumlah langkah dalam fade-out
+        let initialVolume: Float = 0.5 // Volume awal
+
+        // Menghitung penurunan volume pada setiap langkah
+        let volumeStep = initialVolume / Float(fadeSteps)
+
+        // Membuat serangkaian aksi untuk mengurangi volume secara perlahan
+        var fadeOutActions: [SKAction] = []
+        for step in 1...fadeSteps {
+            let volume = initialVolume - Float(step) * volumeStep
+            let changeVolumeAction = SKAction.changeVolume(to: volume, duration: fadeOutDuration / Double(fadeSteps))
+            fadeOutActions.append(changeVolumeAction)
+        }
+
+        // Menjalankan efek fade-out pada audio node
+        music.run(SKAction.sequence(fadeOutActions)) {
+            music.run(SKAction.stop())
+        }
     }
 }

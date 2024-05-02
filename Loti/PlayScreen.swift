@@ -5,7 +5,7 @@ class PlayScreen: SKScene {
     
     var BgHomePlay: SKSpriteNode?
     var PlayButton: SKSpriteNode?
-    var audioPlayer: AVAudioPlayer?
+    var popBubble: SKAudioNode!
     
     override func didMove(to view: SKView) {
         // Mengatur latar belakang menjadi warna putih
@@ -28,7 +28,7 @@ class PlayScreen: SKScene {
             applyBouncyEffect(to: button)
             
             // Panggil fungsi untuk memainkan suara bubble pop
-            playBubblePopSound()
+            popBubble = playBackgroundMusic(musicName: "Pop Edit")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 // Panggil Scene2_Halte
@@ -52,18 +52,17 @@ class PlayScreen: SKScene {
         node.run(bounceAction)
     }
     
-    func playBubblePopSound() {
-        // Membuat path file suara
-        if let soundURL = Bundle.main.url(forResource: "bubble_pop_sound", withExtension: "mp3") {
-            do {
-                // Inisialisasi audio player dengan suara dari path yang dibuat
-                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-                // Mainkan suara
-                audioPlayer?.play()
-                print("audio keplay")
-            } catch {
-                print("Error playing sound: \(error.localizedDescription)")
-            }
+    func playBackgroundMusic(musicName: String) -> SKAudioNode? {
+        // Mencari URL musik dengan menggunakan nama file
+        guard let musicURL = Bundle.main.url(forResource: musicName, withExtension: "mp3") else {
+            print("Background music file not found.")
+            return nil
         }
+        
+        // Membuat audio node dari URL dan mengembalikannya
+        let music = SKAudioNode(url: musicURL)
+        addChild(music)
+        return music
     }
+    
 }
